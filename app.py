@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
-model = joblib.load("../DiabetesDiagnosis/models/Random_Forest.pth")
+model = joblib.load("../DiabetesDiagnosis/models/modelV2.pth")
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -34,14 +34,14 @@ def predict():
 
         input_array = np.array([input_features])
 
-        prediction = model.predict(input_array)[0]
-        proba = model.predict_proba(input_array)[0][1]  
+        probabilities = model.predict_proba(input_array)[0]  # [P(0), P(1)]
+        risk_percentage = round(probabilities[1] * 100, 2)   # Xác suất bị tiểu đường (%)
+        predicted_label = 1 if risk_percentage >= 50 else 0  # Chuan doan bị tiểu đường nếu xác suất >= 70%
 
-
-        return jsonify({"result": {
-            "prediction": int(prediction),
-            "probability": float(proba)
-        }})
+        return jsonify({
+            "risk_percentage": risk_percentage,
+            "predicted_label": predicted_label
+        })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
