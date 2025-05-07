@@ -175,29 +175,23 @@
                 <div class="p-6 md:p-8">
                     <form id="diagnosisForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
+                            
                             <!-- Tuổi -->
                             <div>
                                 <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tuổi</label>
                                 <input type="number" id="age" name="age" min="18" max="120" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
+                            
                             <!-- BMI -->
                             <div>
                                 <label for="bmi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Chỉ số BMI</label>
                                 <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                     
-                            <!-- Huyết áp tâm thu -->
+                            <!-- Huyết áp -->
                             <div>
-                                <label for="systolicPressure" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Huyết áp tâm thu (mmHg)</label>
-                                <input type="number" id="systolicPressure" name="systolicPressure" min="80" max="200" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
-                            </div>
-                    
-                            <!-- Huyết áp tâm trương -->
-                            <div>
-                                <label for="diastolicPressure" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Huyết áp tâm trương (mmHg)</label>
-                                <input type="number" id="diastolicPressure" name="diastolicPressure" min="40" max="120" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <label for="blood_pressure" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Huyết áp (mmHg)</label>
+                                <input type="number" id="blood_pressure" name="blood_pressure" min="40" max="200" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                     
                             <!-- Glucose -->
@@ -205,7 +199,7 @@
                                 <label for="glucose" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Đường huyết lúc đói (mg/dL)</label>
                                 <input type="number" id="glucose" name="glucose" min="70" max="300" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
+                            
                             <!-- Insulin -->
                             <div>
                                 <label for="insulin" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Insulin (μU/mL)</label>
@@ -218,16 +212,10 @@
                                 <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.01" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                     
-                            <!-- Số ngày nằm viện -->
+                            <!-- Số lần mang thai (Pregnancies) -->
                             <div>
-                                <label for="numberOfHospitalDays" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Số ngày nằm viện</label>
-                                <input type="number" id="numberOfHospitalDays" name="numberOfHospitalDays" min="0" max="365" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
-                            </div>
-                    
-                            <!-- WiDS drugs -->
-                            <div>
-                                <label for="widsDrugs" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thuốc sử dụng (WiDS)</label>
-                                <input type="text" id="widsDrugs" name="widsDrugs" placeholder="Nhập tên thuốc, phân cách bằng dấu phẩy nếu nhiều" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                                <label for="pregnancies" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Số lần mang thai</label>
+                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                     
                         </div>
@@ -238,6 +226,7 @@
                             </button>
                         </div>
                     </form>
+                    
                     
                 </div>
             </div>
