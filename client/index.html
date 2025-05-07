@@ -175,58 +175,61 @@
                 <div class="p-6 md:p-8">
                     <form id="diagnosisForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            
                             <!-- Tuổi -->
                             <div>
                                 <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tuổi</label>
-                                <input type="number" id="age" name="age" min="18" max="120" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="age" name="age" min="18" max="120" step="1" placeholder="VD: 32" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                             
                             <!-- BMI -->
                             <div>
                                 <label for="bmi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Chỉ số BMI</label>
-                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" placeholder="VD: 26.5" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
+                            
                             <!-- Huyết áp -->
                             <div>
                                 <label for="blood_pressure" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Huyết áp (mmHg)</label>
-                                <input type="number" id="blood_pressure" name="blood_pressure" min="40" max="200" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="blood_pressure" name="blood_pressure" min="40" max="200" step="1" placeholder="VD: 72" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
+                            
+                            <!-- Độ dày da -->
+                            <div>
+                                <label for="skin_thickness" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Độ dày da (mm)</label>
+                                <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100" step="1" placeholder="VD: 23" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                            </div>
+                            
                             <!-- Glucose -->
                             <div>
                                 <label for="glucose" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Đường huyết lúc đói (mg/dL)</label>
-                                <input type="number" id="glucose" name="glucose" min="70" max="300" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1" placeholder="VD: 121" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
                             
-                            <!-- Insulin -->
+                                <!-- Insulin -->
                             <div>
                                 <label for="insulin" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Insulin (μU/mL)</label>
-                                <input type="number" id="insulin" name="insulin" min="0" max="300" step="0.1" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="insulin" name="insulin" min="0" max="300" step="1" placeholder="VD: 94" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
-                            <!-- Diabetes Pedigree Function -->
+                            
+                                <!-- DPF -->
                             <div>
                                 <label for="diabetesPedigreeFunction" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Chỉ số di truyền (DPF)</label>
-                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.01" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.01" placeholder="VD: 0.372" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
-                            <!-- Số lần mang thai (Pregnancies) -->
+                            
+                                <!-- Mang thai -->
                             <div>
                                 <label for="pregnancies" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Số lần mang thai</label>
-                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1" placeholder="VD: 2" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                             </div>
-                    
                         </div>
-                    
+                        
                         <div class="flex justify-center pt-4">
                             <button type="submit" class="px-8 py-3 bg-primary dark:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
-                                Chẩn đoán ngay
+                            Chẩn đoán ngay
                             </button>
                         </div>
                     </form>
-                    
                     
                 </div>
             </div>

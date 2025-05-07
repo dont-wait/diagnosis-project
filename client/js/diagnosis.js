@@ -55,19 +55,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function fetchDiagnosisResult() {
-        /*
-        fetch('/api/diagnose', {
+        fetch('http://127.0.0.1:5000/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                age: parseInt(document.getElementById('age').value),
-                gender: document.getElementById('gender').value,
+                pregnancies: parseInt(document.getElementById('pregnancies').value),
                 glucose: parseInt(document.getElementById('glucose').value),
-                bmi: parseFloat(document.getElementById('bmi').value),
-                bloodPressure: parseInt(document.getElementById('bloodPressure').value),
-                familyHistory: document.getElementById('familyHistory').value === 'yes'
+                blood_pressure: parseInt(document.getElementById('blood_pressure').value),
+                skin_thickness: parseInt(document.getElementById('bmi').value),
+                insulin: parseInt(document.getElementById('bloodPressure').value),
+                bmi: parseFloat(document.getElementById('familyHistory').value === 'yes'),
+                diabetes_pedigree: parseFloat(document.getElementById('diabetesPedigreeFunction').value),
+                age: parseInt(document.getElementById('age').value)
+
             }),
         })
         .then(response => response.json())
@@ -82,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         });
-        */
     }
     
     function processDiagnosisResult() {
