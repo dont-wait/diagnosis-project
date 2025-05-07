@@ -2,11 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 import numpy as np
-
 app = Flask(__name__)
 CORS(app)
 
-model = joblib.load("../DiabetesDiagnosis/model.pkl")
+model = joblib.load("../DiabetesDiagnosis/models/Random_Forest.pth")
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -36,8 +35,13 @@ def predict():
         input_array = np.array([input_features])
 
         prediction = model.predict(input_array)[0]
+        proba = model.predict_proba(input_array)[0][1]  
 
-        return jsonify({"result": int(prediction)})
+
+        return jsonify({"result": {
+            "prediction": int(prediction),
+            "probability": float(proba)
+        }})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
