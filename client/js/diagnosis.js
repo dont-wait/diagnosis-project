@@ -1,3 +1,5 @@
+let diagnosisChartInstance = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     const diagnosisForm = document.getElementById('diagnosisForm');
     const resultContainer = document.getElementById('resultContainer');
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             pregnanciesInput.removeAttribute('readonly');
             pregnanciesInput.classList.remove('bg-gray-100', 'cursor-not-allowed');
-            pregnanciesInput.value = ''; // cho nhập lại
+            pregnanciesInput.value = ''; 
         }
     });
 
@@ -24,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validateForm()) {
             return;
         }
+
+        if (diagnosisChartInstance) {
+            diagnosisChartInstance.destroy();
+            diagnosisChartInstance = null;
+        }
+        
         
         showLoading();
         setTimeout(fetchDiagnosisResult, 2000); 
@@ -53,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function showLoading() {
         resultContainer.classList.remove('hidden');
         resultContent.innerHTML = `
+            <canvas id="diagnosisChart" class="w-32 h-32 absolute top-4 right-4"></canvas>
+
             <div class="flex justify-center items-center py-4">
                 <svg class="animate-spin h-8 w-8 text-primary light:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -90,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log("Data nhận về:", data); 
             displayResult(data);  
+            
         })
         .catch(error => {
             console.error("Có lỗi xảy ra:", error);
@@ -170,6 +181,78 @@ document.addEventListener('DOMContentLoaded', function() {
             <p class="text-gray-700 light:text-gray-300 mb-4">${riskDescription}</p>
             ${recommendation}
         `;
+        resultContainer.classList.remove('hidden');
+        resultContainer.classList.add('bg-white', 'light:bg-gray-800', 'shadow-lg', 'rounded-lg', 'p-6', 'relative');
+        
+        setTimeout(() => {
+            createDiagnosisChart(percentage);
+        }, 100);   
+        
+    }
+    
+    function createDiagnosisChart(percentage) {
+        const chartCanvas = document.getElementById('diagnosisChart');
+        if (!chartCanvas) {
+            console.error("Chart canvas element not found");
+            return;
+        }
+        
+        const ctx = chartCanvas.getContext('2d');
+        
+        if (diagnosisChartInstance) {
+            diagnosisChartInstance.destroy();
+            diagnosisChartInstance = null;
+        }
+        
+        const centerTextPlugin = {
+            id: 'centerText',
+            beforeDraw: function(chart) {
+                const { width } = chart;
+                const { ctx } = chart;
+                ctx.restore();
+                const fontSize = (width / 8).toFixed(0);
+                ctx.font = `${fontSize}px sans-serif`;
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#111';
+                const text = percentage + '%';
+                const textX = chart.height / 2;
+                const textY = chart.height / 2;
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        };
+        
+        const riskColor = percentage >= 75 ? '#dc2626' : percentage >= 50 ? '#f97316' : '#16a34a';
+        
+        // Create new chart
+        diagnosisChartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Nguy cơ', 'An toàn'],
+                datasets: [{
+                    data: [percentage, 100 - percentage],
+                    backgroundColor: [
+                        riskColor,
+                        '#e5e7eb'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '70%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    centerText: true 
+                }
+            },
+            plugins: [centerTextPlugin] 
+        });
+        
+        console.log("New chart created:", diagnosisChartInstance);
     }
     
 });
