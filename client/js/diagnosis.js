@@ -3,20 +3,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultContainer = document.getElementById('resultContainer');
     const resultContent = document.getElementById('resultContent');
     
+    const genderSelect = document.getElementById('gender');
+    const pregnanciesInput = document.getElementById('pregnancies');
+
+    genderSelect.addEventListener('change', function () {
+        if (genderSelect.value === 'male') {
+            pregnanciesInput.value = 0;
+            pregnanciesInput.setAttribute('readonly', true);
+            pregnanciesInput.classList.add('bg-gray-100', 'cursor-not-allowed');
+        } else {
+            pregnanciesInput.removeAttribute('readonly');
+            pregnanciesInput.classList.remove('bg-gray-100', 'cursor-not-allowed');
+            pregnanciesInput.value = ''; // cho nhập lại
+        }
+    });
+
     diagnosisForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        //validate form
         if (!validateForm()) {
             return;
         }
         
         showLoading();
-
-        //call server
         setTimeout(fetchDiagnosisResult, 2000); 
     });
-    
+
     function validateForm() {
         const age = document.getElementById('age').value;
         const bmi = document.getElementById('bmi').value;
@@ -29,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (
             !age || !bmi || !bloodPressure || !skinThickness ||
-            !glucose || !insulin || !diabetesPedigreeFunction || !pregnancies
+            !glucose || !insulin || !diabetesPedigreeFunction || pregnancies === ''
         ) {
             alert('Vui lòng điền đầy đủ tất cả các trường thông tin.');
             return false;
