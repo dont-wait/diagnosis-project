@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     diagnosisForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        //validate form
         if (!validateForm()) {
             return;
         }
         
         showLoading();
 
+        //call server
         setTimeout(fetchDiagnosisResult, 2000); 
     });
     
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log("Data nhận về:", data);
+            console.log("Data nhận về:", data); 
             displayResult(data);  
         })
         .catch(error => {
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </svg>
                 </div>
                 <h4 class="text-lg font-semibold mb-1">
-                    Nguy cơ tiểu đường: <span class="${riskClass}">${riskLevel}</span>
+                    Nguy cơ tiểu đường: <span class="${riskClass}">${riskLevel}</span><span class="text-gray-500 light:text-gray-300"> (${percentage}%)</span>
                 </h4>
             </div>
             <p class="text-gray-700 light:text-gray-300 mb-4">${riskDescription}</p>

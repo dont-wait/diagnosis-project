@@ -144,18 +144,18 @@
                 <div class="p-6 md:p-8">
                     <form id="diagnosisForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Tuổi -->
+                            <!-- Mang thai -->
                             <div>
-                                <label for="age" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
-                                <input type="number" id="age" name="age" min="18" max="120" step="1" placeholder="VD: 32" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="pregnancies" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần mang thai</label>
+                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1" placeholder="VD: 2" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
                             </div>
                             
-                            <!-- BMI -->
+                            <!-- Glucose -->
                             <div>
-                                <label for="bmi" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số BMI</label>
-                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" placeholder="VD: 26.5" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="glucose" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường huyết lúc đói (mg/dL)</label>
+                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1" placeholder="VD: 121" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
                             </div>
-                            
+
                             <!-- Huyết áp -->
                             <div>
                                 <label for="blood_pressure" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết áp (mmHg)</label>
@@ -168,29 +168,30 @@
                                 <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100" step="1" placeholder="VD: 23" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
                             </div>
                             
-                            <!-- Glucose -->
-                            <div>
-                                <label for="glucose" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường huyết lúc đói (mg/dL)</label>
-                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1" placeholder="VD: 121" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
-                            </div>
-                            
-                                <!-- Insulin -->
+                            <!-- Insulin -->
                             <div>
                                 <label for="insulin" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Insulin (μU/mL)</label>
                                 <input type="number" id="insulin" name="insulin" min="0" max="300" step="1" placeholder="VD: 94" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
                             </div>
-                            
-                                <!-- DPF -->
-                                <div>
-                                    <label for="diabetesPedigreeFunction" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số di truyền (DPF)</label>
-                                    <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
-                                </div>
-                            
-                                <!-- Mang thai -->
+                        
+                            <!-- BMI -->
                             <div>
-                                <label for="pregnancies" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần mang thai</label>
-                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1" placeholder="VD: 2" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="bmi" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số BMI</label>
+                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" placeholder="VD: 26.5" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
                             </div>
+
+                            <!-- DPF -->
+                            <div>
+                                <label for="diabetesPedigreeFunction" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số di truyền (DPF)</label>
+                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                            </div>
+                            
+                            <!-- Tuổi -->
+                            <div>
+                                <label for="age" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
+                                <input type="number" id="age" name="age" min="18" max="120" step="1" placeholder="VD: 32" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                            </div>
+                            
                         </div>
                         
                         <div class="flex justify-center pt-4">
