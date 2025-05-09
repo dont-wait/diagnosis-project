@@ -1,5 +1,6 @@
 let diagnosisChartInstance = null;
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const diagnosisForm = document.getElementById('diagnosisForm');
     const resultContainer = document.getElementById('resultContainer');
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function fetchDiagnosisResult() {
+        
         fetch('http://127.0.0.1:5000/predict', {
             method: 'POST',
             headers: {

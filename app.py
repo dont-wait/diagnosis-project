@@ -17,6 +17,7 @@ def predict():
             'insulin', 'bmi', 'diabetes_pedigree', 'age'
         ]
         
+        #Kiem tra du lieu
         for field in required_fields:
             if field not in data:
                 return jsonify({"error": f"Missing required field: {field}"}), 400
