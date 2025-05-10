@@ -25,3 +25,19 @@ The system uses various models, including:
 - Random Forest
 - Support Vector Machines
 - Neural Networks
+
+## 🖼️ Screenshots
+🏠 Home	
+![Home Page](./screenshots/home.png)
+
+📝 Form	
+![Form](./screenshots/form.png)
+
+✅ Green Result	
+![Green](./screenshots/green.jpg)
+
+⚠️ Orange Result	
+![Orange](./screenshots/orange.jpg)
+
+❌ Red Result
+![Red](./screenshots/red.jpg)
