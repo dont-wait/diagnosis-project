@@ -14,8 +14,7 @@ This project is an AI-powered medical diagnosis system that helps identify poten
 
 - **Backend:** Python (Flask/FastAPI)
 - **ML Libraries:** Scikit-learn, TensorFlow, Pandas
-- **Frontend:** React.js or HTML/CSS (optional UI)
-- **Database:** PostgreSQL or SQLite
+- **Frontend:** HTML/CSS (optional UI)
 - **API Testing:** Postman
 
 ## 📊 Machine Learning Models
