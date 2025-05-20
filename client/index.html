@@ -20,22 +20,18 @@
     <!-- Header -->
     <header class="bg-white light:bg-light-bg shadow-sm w-full">
         <div class="container max-w-full px-4 py-3">
-            <div class="flex flex-col md:flex-row justify-between items-center w-full">
+            <div class="flex flex-col md:flex-row justify-between items-center">
 
                 <div class="flex items-center mb-4 md:mb-0">
                     <img src="images/logo.svg" alt="" style="width: 500px; height: auto;">
                 </div>
 
                 <div class="flex flex-col justify-center mb-4 md:mb-0">
-
-
                     <div class="flex flex-col justify-center mb-4 md:mb-0">
-
                         <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3">CUỘC THI</h1>
                         <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">DIGITAL TRANSFORMATION
                             CHALLENGE</h1>
                         <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">NĂM HỌC 2025-2026</h1>
-
                     </div>
 
 
@@ -47,17 +43,13 @@
 
     <!-- Navigation -->
     <nav class="bg-primary light:bg-light-primary text-white">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 max-w-full">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div
                     class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 py-4 text-center md:text-left">
                     <a href="#" class="text-xl font-medium hover:text-blue-200 transition duration-150">Home</a>
                     <a href="#about" class="text-xl font-medium hover:text-blue-200 transition duration-150">About
                         us</a>
-                    <a href="#services"
-                        class="text-xl font-medium hover:text-blue-200 transition duration-150">Services</a>
-                    <a href="#doctors"
-                        class="text-xl font-medium hover:text-blue-200 transition duration-150">Doctors</a>
                     <a href="#news" class="text-xl font-medium hover:text-blue-200 transition duration-150">News</a>
                     <a href="#contact"
                         class="text-xl font-medium hover:text-blue-200 transition duration-150">Contact</a>
@@ -85,6 +77,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
                     <h2 class="text-lg font-semibold text-secondary light:text-blue-300 mb-2">CHẨN ĐOÁN BỆNH TIỂU ĐƯỜNG
+                        BẰNG HỌC MÁY
                     </h2>
                     <h1 class="text-4xl md:text-5xl font-bold text-primary light:text-white mb-6">Công nghệ AI
                         <br />Chẩn đoán tiểu đường
@@ -167,8 +160,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-2">Độ Chính Xác Cao</h3>
                     <p class="text-gray-600 light:text-gray-400">
-                        Hệ thống đạt độ chính xác lên tới 95% khi được kiểm chứng với dữ liệu lâm sàng thực tế từ các
-                        bệnh viện hàng đầu.
+                        Hệ thống đạt độ chính xác cao khi sử dụng bộ dữ liệu đã qua kiểm định.
                     </p>
                 </div>
             </div>
@@ -185,147 +177,155 @@
                 </p>
             </div>
 
-            <div class="max-w-3xl mx-auto bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <!-- Form  -->
-                    <form id="diagnosisForm" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Giới tính -->
-                            <div>
-                                <label for="gender"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Giới
-                                    tính</label>
-                                <select id="gender" name="gender"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                                    <option value="female">Nữ</option>
-                                    <option value="male">Nam</option>
-                                </select>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/2 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <!-- Form  -->
+                        <form id="diagnosisForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Giới tính -->
+                                <div>
+                                    <label for="gender"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Giới
+                                        tính</label>
+                                    <select id="gender" name="gender"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                        <option value="female">Nữ</option>
+                                        <option value="male">Nam</option>
+                                    </select>
+                                </div>
+                                <!-- Mang thai -->
+                                <div>
+                                    <label for="pregnancies"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần
+                                        mang
+                                        thai</label>
+                                    <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1"
+                                        placeholder="VD: 2"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- Glucose -->
+                                <div>
+                                    <label for="glucose"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường
+                                        huyết
+                                        lúc đói (mg/dL)</label>
+                                    <input type="number" id="glucose" name="glucose" min="70" max="300" step="1"
+                                        placeholder="VD: 121"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- Huyết áp -->
+                                <div>
+                                    <label for="blood_pressure"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết
+                                        áp
+                                        (mmHg)</label>
+                                    <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="200"
+                                        step="1" placeholder="VD: 72"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- Độ dày da -->
+                                <div>
+                                    <label for="skin_thickness"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Độ dày
+                                        da
+                                        (mm)</label>
+                                    <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100"
+                                        step="1" placeholder="VD: 23"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- Insulin -->
+                                <div>
+                                    <label for="insulin"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Insulin
+                                        (μU/mL)</label>
+                                    <input type="number" id="insulin" name="insulin" min="0" max="300" step="1"
+                                        placeholder="VD: 94"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- BMI -->
+                                <div>
+                                    <label for="bmi"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số
+                                        BMI</label>
+                                    <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1"
+                                        placeholder="VD: 26.5"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- DPF -->
+                                <div>
+                                    <label for="diabetesPedigreeFunction"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số
+                                        di
+                                        truyền (DPF)</label>
+                                    <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction"
+                                        min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                </div>
+
+                                <!-- Tuổi -->
+                                <div>
+                                    <label for="age"
+                                        class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
+                                    <input type="number" id="age" name="age" min="18" max="120" step="1"
+                                        placeholder="VD: 32"
+                                        class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                        required>
+                                    p
+                                </div>
+
                             </div>
-                            <!-- Mang thai -->
-                            <div>
-                                <label for="pregnancies"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần mang
-                                    thai</label>
-                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1"
-                                    placeholder="VD: 2"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
+
+                            <div class="flex justify-center pt-4">
+                                <button type="submit"
+                                    class="px-8 py-3 bg-primary light:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 light:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
+                                    Chẩn đoán ngay
+                                </button>
                             </div>
+                        </form>
 
-                            <!-- Glucose -->
-                            <div>
-                                <label for="glucose"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường huyết
-                                    lúc đói (mg/dL)</label>
-                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1"
-                                    placeholder="VD: 121"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- Huyết áp -->
-                            <div>
-                                <label for="blood_pressure"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết áp
-                                    (mmHg)</label>
-                                <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="200"
-                                    step="1" placeholder="VD: 72"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- Độ dày da -->
-                            <div>
-                                <label for="skin_thickness"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Độ dày da
-                                    (mm)</label>
-                                <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100"
-                                    step="1" placeholder="VD: 23"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- Insulin -->
-                            <div>
-                                <label for="insulin"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Insulin
-                                    (μU/mL)</label>
-                                <input type="number" id="insulin" name="insulin" min="0" max="300" step="1"
-                                    placeholder="VD: 94"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- BMI -->
-                            <div>
-                                <label for="bmi"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số
-                                    BMI</label>
-                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1"
-                                    placeholder="VD: 26.5"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- DPF -->
-                            <div>
-                                <label for="diabetesPedigreeFunction"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số di
-                                    truyền (DPF)</label>
-                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction"
-                                    min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                            <!-- Tuổi -->
-                            <div>
-                                <label for="age"
-                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
-                                <input type="number" id="age" name="age" min="18" max="120" step="1"
-                                    placeholder="VD: 32"
-                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
-                                    required>
-                            </div>
-
-                        </div>
-
-                        <div class="flex justify-center pt-4">
-                            <button type="submit"
-                                class="px-8 py-3 bg-primary light:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 light:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
-                                Chẩn đoán ngay
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
-            <div id="resultContainer"
-                class="max-w-4xl mx-auto mt-8 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden hidden">
-                <div class="flex flex-col md:flex-row p-6 md:p-8 gap-6">
-                    <!-- Phần bên trái: Nội dung chẩn đoán -->
-                    <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-4">Kết quả chẩn đoán</h3>
-                        <div id="resultContent" class="mb-4"></div>
-                        <div id="resultDetails" class="p-4 bg-gray-50 light:bg-gray-700 rounded-lg">
-                            <h4 class="font-medium text-gray-900 light:text-white mb-2">Lưu ý quan trọng:</h4>
-                            <p class="text-gray-600 light:text-gray-400 text-sm">
-                                Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa chuyên
-                                nghiệp. Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Phần bên phải: Biểu đồ -->
-                    <div class="w-full md:w-64 flex items-center justify-center">
-                        <canvas id="diagnosisChart" class="w-64 h-64"></canvas>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <div id="resultContainer"
+                    class="w-full md:w-1/2 mt-8 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden hidden">
+                    <div class="flex flex-col md:flex-row p-6 md:p-8 gap-6">
+                        <!-- Phần bên trái: Nội dung chẩn đoán -->
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-4">Kết quả chẩn đoán</h3>
+                            <div id="resultContent" class="mb-4"></div>
+                            <div id="resultDetails" class="p-4 bg-gray-50 light:bg-gray-700 rounded-lg">
+                                <h4 class="font-medium text-gray-900 light:text-white mb-2">Lưu ý quan trọng:</h4>
+                                <p class="text-gray-600 light:text-gray-400 text-sm">
+                                    Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa chuyên
+                                    nghiệp. Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phần bên phải: Biểu đồ -->
+                        <div class="w-full md:w-64 flex items-center justify-center">
+                            <canvas id="diagnosisChart" class="w-64 h-64"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
     </section>
 
     <!-- How it Works Section -->
