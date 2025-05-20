@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hệ thống chẩn đoán bệnh tiểu đường dựa trên học máy, giúp phát hiện sớm dấu hiệu tiểu đường.">
+    <meta name="description"
+        content="Hệ thống chẩn đoán bệnh tiểu đường dựa trên học máy, giúp phát hiện sớm dấu hiệu tiểu đường.">
     <title>Chẩn đoán bệnh tiểu đường dựa trên học máy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="antialiased bg-white light:bg-light-bg text-gray-900 light:text-light-text">
     <!-- Header -->
     <header class="bg-white light:bg-light-bg shadow-sm">
         <div class="container mx-auto px-4 py-3">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                
+
                 <div class="flex items-center mb-4 md:mb-0">
                     <img src="images/logo.svg" alt="" style="width: 500px; height: auto;">
                 </div>
-                
-                <div class="flex flex-col justify-center mb-4 md:mb-0" >
-                
+
+                <div class="flex flex-col justify-center mb-4 md:mb-0">
+
                     <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3">CUỘC THI</h1>
-                    <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">DIGITAL TRANSFORMATION CHALLENGE</h1>
-                    <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">NĂM HỌC 2025-2026</h1> 
+                    <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">DIGITAL TRANSFORMATION
+                        CHALLENGE</h1>
+                    <h1 class="text-3xl font-bold text-center w-full" style="color: #0066B3;">NĂM HỌC 2025-2026</h1>
 
                 </div>
-                
-                
+
+
             </div>
         </div>
     </header>
@@ -36,21 +40,30 @@
     <nav class="bg-primary light:bg-light-primary text-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 py-4 text-center md:text-left">
+                <div
+                    class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 py-4 text-center md:text-left">
                     <a href="#" class="text-xl font-medium hover:text-blue-200 transition duration-150">Home</a>
-                    <a href="#about" class="text-xl font-medium hover:text-blue-200 transition duration-150">About us</a>
-                    <a href="#services" class="text-xl font-medium hover:text-blue-200 transition duration-150">Services</a>
-                    <a href="#doctors" class="text-xl font-medium hover:text-blue-200 transition duration-150">Doctors</a>
+                    <a href="#about" class="text-xl font-medium hover:text-blue-200 transition duration-150">About
+                        us</a>
+                    <a href="#services"
+                        class="text-xl font-medium hover:text-blue-200 transition duration-150">Services</a>
+                    <a href="#doctors"
+                        class="text-xl font-medium hover:text-blue-200 transition duration-150">Doctors</a>
                     <a href="#news" class="text-xl font-medium hover:text-blue-200 transition duration-150">News</a>
-                    <a href="#contact" class="text-xl font-medium hover:text-blue-200 transition duration-150">Contact</a>
+                    <a href="#contact"
+                        class="text-xl font-medium hover:text-blue-200 transition duration-150">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4 pb-4 md:pb-0">
                     <button class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </button>
-                    <a href="#diagnosis" class="bg-white text-primary light:bg-blue-700 light:text-white px-6 py-2 rounded-full font-medium hover:bg-blue-50 light:hover:bg-blue-600 transition duration-150">Chẩn đoán ngay</a>
+                    <a href="#diagnosis"
+                        class="bg-white text-primary light:bg-blue-700 light:text-white px-6 py-2 rounded-full font-medium hover:bg-blue-50 light:hover:bg-blue-600 transition duration-150">Chẩn
+                        đoán ngay</a>
                 </div>
             </div>
         </div>
@@ -62,22 +75,29 @@
         <div class="container mx-auto px-4 py-16 md:py-24 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <h2 class="text-lg font-semibold text-secondary light:text-blue-300 mb-2">CHẨN ĐOÁN BỆNH TIỂU ĐƯỜNG</h2>
-                    <h1 class="text-4xl md:text-5xl font-bold text-primary light:text-white mb-6">Công nghệ AI <br/>Chẩn đoán tiểu đường</h1>
+                    <h2 class="text-lg font-semibold text-secondary light:text-blue-300 mb-2">CHẨN ĐOÁN BỆNH TIỂU ĐƯỜNG
+                    </h2>
+                    <h1 class="text-4xl md:text-5xl font-bold text-primary light:text-white mb-6">Công nghệ AI
+                        <br />Chẩn đoán tiểu đường
+                    </h1>
                     <p class="text-gray-700 light:text-gray-300 mb-8">
-                        Hệ thống chẩn đoán bệnh tiểu đường hiện đại sử dụng học máy (Machine Learning) giúp phát hiện sớm các dấu hiệu tiểu đường dựa trên các yếu tố nguy cơ và chỉ số sức khỏe của bạn.
+                        Hệ thống chẩn đoán bệnh tiểu đường hiện đại sử dụng học máy (Machine Learning) giúp phát hiện
+                        sớm các dấu hiệu tiểu đường dựa trên các yếu tố nguy cơ và chỉ số sức khỏe của bạn.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#diagnosis" class="inline-block bg-primary light:bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-800 light:hover:bg-blue-700 transition duration-150 text-center">
+                        <a href="#diagnosis"
+                            class="inline-block bg-primary light:bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-800 light:hover:bg-blue-700 transition duration-150 text-center">
                             Kiểm tra ngay
                         </a>
-                        <a href="#about" class="inline-block border border-primary light:border-blue-500 text-primary light:text-blue-400 px-6 py-3 rounded-full font-medium hover:bg-blue-50 light:hover:bg-blue-900/30 transition duration-150 text-center">
+                        <a href="#about"
+                            class="inline-block border border-primary light:border-blue-500 text-primary light:text-blue-400 px-6 py-3 rounded-full font-medium hover:bg-blue-50 light:hover:bg-blue-900/30 transition duration-150 text-center">
                             Tìm hiểu thêm
                         </a>
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Doctor with medical technology" class="rounded-lg shadow-lg max-w-full h-auto">
+                    <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Doctor with medical technology" class="rounded-lg shadow-lg max-w-full h-auto">
                 </div>
             </div>
         </div>
@@ -89,44 +109,57 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-primary light:text-blue-400">Về Hệ Thống Chẩn Đoán</h2>
                 <p class="text-gray-600 light:text-gray-400 mt-3 max-w-2xl mx-auto">
-                    Giải pháp chẩn đoán bệnh tiểu đường dựa trên trí tuệ nhân tạo và học máy, mang lại kết quả chính xác và nhanh chóng.
+                    Giải pháp chẩn đoán bệnh tiểu đường dựa trên trí tuệ nhân tạo và học máy, mang lại kết quả chính xác
+                    và nhanh chóng.
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-2">Dữ Liệu Y Khoa</h3>
                     <p class="text-gray-600 light:text-gray-400">
-                        Hệ thống được huấn luyện trên dữ liệu y khoa đa dạng từ hàng nghìn bệnh nhân với kết quả chẩn đoán đã được xác nhận.
+                        Hệ thống được huấn luyện trên dữ liệu y khoa đa dạng từ hàng nghìn bệnh nhân với kết quả chẩn
+                        đoán đã được xác nhận.
                     </p>
                 </div>
-                
+
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-2">Học Máy Tiên Tiến</h3>
                     <p class="text-gray-600 light:text-gray-400">
-                        Thuật toán học máy tiên tiến phân tích các yếu tố nguy cơ và triệu chứng để dự đoán khả năng mắc bệnh tiểu đường chính xác.
+                        Thuật toán học máy tiên tiến phân tích các yếu tố nguy cơ và triệu chứng để dự đoán khả năng mắc
+                        bệnh tiểu đường chính xác.
                     </p>
                 </div>
-                
+
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary light:text-blue-400"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 light:text-white mb-2">Độ Chính Xác Cao</h3>
                     <p class="text-gray-600 light:text-gray-400">
-                        Hệ thống đạt độ chính xác lên tới 95% khi được kiểm chứng với dữ liệu lâm sàng thực tế từ các bệnh viện hàng đầu.
+                        Hệ thống đạt độ chính xác lên tới 95% khi được kiểm chứng với dữ liệu lâm sàng thực tế từ các
+                        bệnh viện hàng đầu.
                     </p>
                 </div>
             </div>
@@ -142,80 +175,125 @@
                     Nhập thông tin sức khỏe của bạn để nhận kết quả đánh giá nguy cơ tiểu đường dựa trên học máy.
                 </p>
             </div>
-            
+
             <div class="max-w-3xl mx-auto bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 md:p-8">
                     <form id="diagnosisForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Giới tính -->
-                        <div>
-                            <label for="gender" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Giới tính</label>
-                            <select id="gender" name="gender" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
-                                <option value="female">Nữ</option>
-                                <option value="male">Nam</option>
-                            </select>
-                        </div>
+                            <div>
+                                <label for="gender"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Giới
+                                    tính</label>
+                                <select id="gender" name="gender"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
+                                    <option value="female">Nữ</option>
+                                    <option value="male">Nam</option>
+                                </select>
+                            </div>
                             <!-- Mang thai -->
                             <div>
-                                <label for="pregnancies" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần mang thai</label>
-                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1" placeholder="VD: 2" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="pregnancies"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần mang
+                                    thai</label>
+                                <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1"
+                                    placeholder="VD: 2"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                            
+
                             <!-- Glucose -->
                             <div>
-                                <label for="glucose" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường huyết lúc đói (mg/dL)</label>
-                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1" placeholder="VD: 121" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="glucose"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường huyết
+                                    lúc đói (mg/dL)</label>
+                                <input type="number" id="glucose" name="glucose" min="70" max="300" step="1"
+                                    placeholder="VD: 121"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
 
                             <!-- Huyết áp -->
                             <div>
-                                <label for="blood_pressure" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết áp (mmHg)</label>
-                                <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="200" step="1" placeholder="VD: 72" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="blood_pressure"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết áp
+                                    (mmHg)</label>
+                                <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="200"
+                                    step="1" placeholder="VD: 72"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                            
+
                             <!-- Độ dày da -->
                             <div>
-                                <label for="skin_thickness" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Độ dày da (mm)</label>
-                                <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100" step="1" placeholder="VD: 23" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="skin_thickness"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Độ dày da
+                                    (mm)</label>
+                                <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100"
+                                    step="1" placeholder="VD: 23"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                            
+
                             <!-- Insulin -->
                             <div>
-                                <label for="insulin" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Insulin (μU/mL)</label>
-                                <input type="number" id="insulin" name="insulin" min="0" max="300" step="1" placeholder="VD: 94" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="insulin"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Insulin
+                                    (μU/mL)</label>
+                                <input type="number" id="insulin" name="insulin" min="0" max="300" step="1"
+                                    placeholder="VD: 94"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                        
+
                             <!-- BMI -->
                             <div>
-                                <label for="bmi" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số BMI</label>
-                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1" placeholder="VD: 26.5" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="bmi"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số
+                                    BMI</label>
+                                <input type="number" id="bmi" name="bmi" min="15" max="50" step="0.1"
+                                    placeholder="VD: 26.5"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
 
                             <!-- DPF -->
                             <div>
-                                <label for="diabetesPedigreeFunction" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số di truyền (DPF)</label>
-                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction" min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="diabetesPedigreeFunction"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số di
+                                    truyền (DPF)</label>
+                                <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction"
+                                    min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                            
+
                             <!-- Tuổi -->
                             <div>
-                                <label for="age" class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
-                                <input type="number" id="age" name="age" min="18" max="120" step="1" placeholder="VD: 32" class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white" required>
+                                <label for="age"
+                                    class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Tuổi</label>
+                                <input type="number" id="age" name="age" min="18" max="120" step="1"
+                                    placeholder="VD: 32"
+                                    class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
+                                    required>
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="flex justify-center pt-4">
-                            <button type="submit" class="px-8 py-3 bg-primary light:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 light:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
-                            Chẩn đoán ngay
+                            <button type="submit"
+                                class="px-8 py-3 bg-primary light:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 light:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
+                                Chẩn đoán ngay
                             </button>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
-            
-            <div id="resultContainer" class="max-w-4xl mx-auto mt-8 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden hidden">
+
+            <div id="resultContainer"
+                class="max-w-4xl mx-auto mt-8 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden hidden">
                 <div class="flex flex-col md:flex-row p-6 md:p-8 gap-6">
                     <!-- Phần bên trái: Nội dung chẩn đoán -->
                     <div class="flex-1">
@@ -224,18 +302,19 @@
                         <div id="resultDetails" class="p-4 bg-gray-50 light:bg-gray-700 rounded-lg">
                             <h4 class="font-medium text-gray-900 light:text-white mb-2">Lưu ý quan trọng:</h4>
                             <p class="text-gray-600 light:text-gray-400 text-sm">
-                                Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa chuyên nghiệp. Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
+                                Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa chuyên
+                                nghiệp. Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
                             </p>
                         </div>
                     </div>
-            
+
                     <!-- Phần bên phải: Biểu đồ -->
                     <div class="w-full md:w-64 flex items-center justify-center">
                         <canvas id="diagnosisChart" class="w-64 h-64"></canvas>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
@@ -248,10 +327,11 @@
                     Hiểu về quá trình chẩn đoán tiểu đường dựa trên công nghệ học máy của chúng tôi.
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md text-center">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-xl font-bold text-primary light:text-blue-400">1</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 light:text-white mb-2">Nhận dữ liệu</h3>
@@ -259,9 +339,10 @@
                         Bạn cung cấp thông tin sức khỏe cơ bản như tuổi, chỉ số đường huyết, BMI và tiền sử bệnh.
                     </p>
                 </div>
-                
+
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md text-center">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-xl font-bold text-primary light:text-blue-400">2</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 light:text-white mb-2">Xử lý dữ liệu</h3>
@@ -269,9 +350,10 @@
                         Hệ thống xử lý thông tin và chuẩn hóa dữ liệu để phù hợp với mô hình học máy.
                     </p>
                 </div>
-                
+
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md text-center">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-xl font-bold text-primary light:text-blue-400">3</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 light:text-white mb-2">Phân tích AI</h3>
@@ -279,9 +361,10 @@
                         Mô hình học máy phân tích dữ liệu dựa trên thuật toán đã được huấn luyện với dữ liệu y khoa.
                     </p>
                 </div>
-                
+
                 <div class="bg-white light:bg-gray-800 p-6 rounded-lg shadow-md text-center">
-                    <div class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div
+                        class="w-12 h-12 bg-blue-100 light:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-xl font-bold text-primary light:text-blue-400">4</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 light:text-white mb-2">Kết quả & Tư vấn</h3>
@@ -298,21 +381,24 @@
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">Bắt đầu chẩn đoán ngay hôm nay</h2>
             <p class="max-w-2xl mx-auto mb-8">
-                Phát hiện sớm bệnh tiểu đường giúp bạn có biện pháp phòng ngừa và điều trị kịp thời. Sử dụng công cụ chẩn đoán của chúng tôi để đánh giá nguy cơ.
+                Phát hiện sớm bệnh tiểu đường giúp bạn có biện pháp phòng ngừa và điều trị kịp thời. Sử dụng công cụ
+                chẩn đoán của chúng tôi để đánh giá nguy cơ.
             </p>
-            <a href="#diagnosis" class="inline-block bg-white text-primary light:bg-blue-300 light:text-blue-900 px-8 py-3 rounded-full font-medium hover:bg-blue-100 light:hover:bg-blue-200 transition duration-150">
+            <a href="#diagnosis"
+                class="inline-block bg-white text-primary light:bg-blue-300 light:text-blue-900 px-8 py-3 rounded-full font-medium hover:bg-blue-100 light:hover:bg-blue-200 transition duration-150">
                 Chẩn đoán miễn phí
             </a>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="bg-gray-800 light:bg-gray-950 text-white py-10">
         <div class="container mx-auto px-4">
             <div class="flex md:flex-row justify-center items-center text-center">
-                <div> 
+                <div>
                     <p class="text-gray-200 mb-1">
-                    Giải pháp chấn đoán bệnh Tiểu đường dựa trên học máy. Ứng dụng được thực hiện bởi nhóm sinh viên HUIT.                     
+                        Giải pháp chấn đoán bệnh Tiểu đường dựa trên học máy. Ứng dụng được thực hiện bởi nhóm sinh viên
+                        HUIT.
                     </p>
                 </div>
             </div>
@@ -325,4 +411,5 @@
     <script src="js/main.js"></script>
     <script src="js/diagnosis.js"></script>
 </body>
+
 </html>
