@@ -1,11 +1,11 @@
 let diagnosisChartInstance = null;
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const diagnosisForm = document.getElementById('diagnosisForm');
     const resultContainer = document.getElementById('resultContainer');
     const resultContent = document.getElementById('resultContent');
-    
+
     const genderSelect = document.getElementById('gender');
     const pregnanciesInput = document.getElementById('pregnancies');
 
@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             pregnanciesInput.removeAttribute('readonly');
             pregnanciesInput.classList.remove('bg-gray-100', 'cursor-not-allowed');
-            pregnanciesInput.value = ''; 
+            pregnanciesInput.value = '';
         }
     });
 
-    diagnosisForm.addEventListener('submit', function(e) {
+    diagnosisForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         if (!validateForm()) {
             return;
         }
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
             diagnosisChartInstance.destroy();
             diagnosisChartInstance = null;
         }
-        
-        
+
+
         showLoading();
-        setTimeout(fetchDiagnosisResult, 2000); 
+        setTimeout(fetchDiagnosisResult, 2000);
     });
 
     function validateForm() {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const insulin = document.getElementById('insulin').value;
         const diabetesPedigreeFunction = document.getElementById('diabetesPedigreeFunction').value;
         const pregnancies = document.getElementById('pregnancies').value;
-    
+
         if (
             !age || !bmi || !bloodPressure || !skinThickness ||
             !glucose || !insulin || !diabetesPedigreeFunction || pregnancies === ''
@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Vui lòng điền đầy đủ tất cả các trường thông tin.');
             return false;
         }
-    
+
         return true;
     }
-    
+
     function showLoading() {
         resultContainer.classList.remove('hidden');
         resultContent.innerHTML = `
@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
-    
+
     function fetchDiagnosisResult() {
-        
+
         fetch('http://127.0.0.1:5000/predict', {
             method: 'POST',
             headers: {
@@ -92,35 +92,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 age: parseInt(document.getElementById('age').value)
             }),
         })
-        .then(response => {
-            console.log("Response object:", response);
-            if (!response.ok) {
-                throw new Error("Phản hồi không hợp lệ từ server");
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Data nhận về:", data); 
-            displayResult(data);  
-            
-        })
-        .catch(error => {
-            console.error("Có lỗi xảy ra:", error);
-            resultContent.innerHTML = `
+            .then(response => {
+                console.log("Response object:", response);
+                if (!response.ok) {
+                    throw new Error("Phản hồi không hợp lệ từ server");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Data nhận về:", data);
+                displayResult(data);
+
+            })
+            .catch(error => {
+                console.error("Có lỗi xảy ra:", error);
+                resultContent.innerHTML = `
                 <div class="p-4 bg-red-50 light:bg-red-900/30 rounded-lg text-red-600 light:text-red-400">
                     Đã xảy ra lỗi trong quá trình chẩn đoán. Vui lòng thử lại sau.
                 </div>
             `;
-        });
+            });
     }
-    
+
     function displayResult(data) {
         const percentage = data.risk_percentage;
         let riskLevel = '';
         let riskClass = '';
         let riskDescription = '';
         let recommendation = '';
-    
+
         if (percentage >= 75) {
             // Mức NGUY CƠ CAO
             riskLevel = "RẤT CAO";
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }
-    
+
         resultContent.innerHTML = `
             <div class="mb-6 text-center">
                 <div class="inline-block rounded-full bg-gray-100 light:bg-gray-700 p-3 mb-3">
@@ -185,30 +185,30 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         resultContainer.classList.remove('hidden');
         resultContainer.classList.add('bg-white', 'light:bg-gray-800', 'shadow-lg', 'rounded-lg', 'p-6', 'relative');
-        
+
         setTimeout(() => {
             createDiagnosisChart(percentage);
-        }, 100);   
-        
+        }, 100);
+
     }
-    
+
     function createDiagnosisChart(percentage) {
         const chartCanvas = document.getElementById('diagnosisChart');
         if (!chartCanvas) {
             console.error("Chart canvas element not found");
             return;
         }
-        
+
         const ctx = chartCanvas.getContext('2d');
-        
+
         if (diagnosisChartInstance) {
             diagnosisChartInstance.destroy();
             diagnosisChartInstance = null;
         }
-        
+
         const centerTextPlugin = {
             id: 'centerText',
-            beforeDraw: function(chart) {
+            beforeDraw: function (chart) {
                 const { width } = chart;
                 const { ctx } = chart;
                 ctx.restore();
@@ -224,9 +224,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 ctx.save();
             }
         };
-        
+
         const riskColor = percentage >= 75 ? '#dc2626' : percentage >= 50 ? '#f97316' : '#16a34a';
-        
+
         // Create new chart
         diagnosisChartInstance = new Chart(ctx, {
             type: 'doughnut',
@@ -248,13 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 plugins: {
                     legend: { display: false },
                     tooltip: { enabled: false },
-                    centerText: true 
+                    centerText: true
                 }
             },
-            plugins: [centerTextPlugin] 
+            plugins: [centerTextPlugin]
         });
-        
+
         console.log("New chart created:", diagnosisChartInstance);
     }
-    
+
 });
