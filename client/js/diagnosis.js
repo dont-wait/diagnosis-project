@@ -161,8 +161,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h4 class="text-lg font-semibold mb-1">
-                Nguy cơ tiểu đường: <span class="${riskClass}">${riskLevel}</span><span class="text-gray-500 light:text-gray-300"> (${percentage}%)</span>
+            <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+            Nguy cơ tiểu đường:
+            <span class="ml-2 px-2 py-1 rounded-full ${riskClass} bg-opacity-10 border ${riskClass.replace('text-', 'border-')}"> 
+            ${riskLevel} (${percentage}%)
+            </span>
             </h4>
         </div>
         ${recommendation}
@@ -178,14 +181,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hiển thị lời khuyên từ AI
         document.getElementById('aiAdviceContainer').classList.remove('hidden');
         document.getElementById('aiAdviceContent').innerHTML = `
-        <h4 class="text-lg font-semibold mb-3 text-gray-800 light:text-gray-100">🧠 Lời khuyên chi tiết từ AI</h4>
-        <p class="mb-2"><strong>Tóm tắt:</strong> ${advice.summary || 'Không có dữ liệu'}</p>
-        <p class="mb-2"><strong>Mức độ nguy hiểm:</strong> ${advice.danger_level || 'Không rõ'}</p>
-        <p class="mb-2"><strong>Triệu chứng cần theo dõi:</strong> ${advice.symptoms_to_watch || 'Không rõ'}</p>
-        <p class="mb-2"><strong>Hành động cần thực hiện ngay:</strong> ${advice.immediate_actions || 'Không rõ'}</p>
-        <p class="mb-2"><strong>Chế độ ăn uống khuyến nghị:</strong> ${advice.diet || 'Không rõ'}</p>
-        <p><strong>Thời điểm cần đi khám:</strong> ${advice.doctor_visit_timing || 'Không rõ'}</p>
-    `;
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+        <h4 class="text-xl font-semibold mb-4 flex items-center text-blue-800">
+            🧠 <span class="ml-2">Lời khuyên chi tiết từ AI</span>
+        </h4>
+        <div class="space-y-3 text-gray-800 text-[15px] leading-relaxed">
+            <p><span class="font-semibold text-blue-700">Tóm tắt:</span> ${advice.summary || 'Không có dữ liệu'}</p>
+            <p><span class="font-semibold text-blue-700">Mức độ nguy hiểm:</span> ${advice.danger_level || 'Không rõ'}</p>
+            <p><span class="font-semibold text-blue-700">Triệu chứng cần theo dõi:</span> ${advice.symptoms_to_watch || 'Không rõ'}</p>
+            <p><span class="font-semibold text-blue-700">Hành động cần thực hiện ngay:</span> ${advice.immediate_actions || 'Không rõ'}</p>
+            <p><span class="font-semibold text-blue-700">Chế độ ăn uống khuyến nghị:</span> ${advice.diet || 'Không rõ'}</p>
+            <p><span class="font-semibold text-blue-700">Thời điểm cần đi khám:</span> ${advice.doctor_visit_timing || 'Không rõ'}</p>
+        </div>
+    </div>
+`;
     }
 
 
@@ -240,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 cutout: '70%',
                 plugins: {
                     legend: { display: false },
