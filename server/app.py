@@ -13,7 +13,7 @@ genai.configure(api_key = api_key)
 
 app = Flask(__name__)
 CORS(app)
-model = joblib.load("../DiabetesDiagnosis/models/modelV2.pth")
+model = joblib.load("../models/modelV2.pth")
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchDiagnosisResult() {
 
-        fetch('https://87cd-101-53-36-58.ngrok-free.app/predict', {
+        fetch('https://a6b4-101-53-36-58.ngrok-free.app/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
