@@ -72,7 +72,6 @@ def get_ai_recommendation(risk_percentage):
         response = model.generate_content(prompt)
 
         raw_text = response.text.strip()
-        print("Raw response from Gemini:\n", raw_text)
 
         extracted_json = extract_json_from_text(raw_text)
         if not extracted_json:
