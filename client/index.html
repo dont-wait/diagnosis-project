@@ -307,22 +307,13 @@
                             <h3 class="text-2xl font-semibold text-gray-900 mb-4">Kết quả chẩn đoán</h3>
                             <div>
                                 <div id="resultContent" class="mb-4"></div>
-                                <div id="aiAdviceContainer" class="mt-6 hidden">
-                                    <h5 class="text-sm font-semibold mb-2 text-blue-700">🤖 Trí tuệ nhân tạo khuyên bạn:
-                                    </h5>
-                                    <div id="aiAdviceContent"
-                                        class="text-gray-800 text-sm bg-blue-50 rounded p-5 border border-blue-200 leading-relaxed">
-                                        Đang lấy lời khuyên cá nhân hóa...
-                                    </div>
-                                    <div id="resultDetails"
-                                        class="p-4 bg-gray-50 rounded-lg mb-4 border border-gray-200">
-                                        <h4 class="font-medium text-gray-900 mb-2">⚠️ Lưu ý quan trọng:</h4>
-                                        <p class="text-gray-600 text-sm leading-relaxed">
-                                            Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa
-                                            chuyên nghiệp.
-                                            Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
-                                        </p>
-                                    </div>
+                                <div id="resultDetails" class="p-4 bg-gray-50 rounded-lg mb-4 border border-gray-200">
+                                    <h4 class="font-medium text-gray-900 mb-2">⚠️ Lưu ý quan trọng:</h4>
+                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                        Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa
+                                        chuyên nghiệp.
+                                        Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -332,6 +323,14 @@
                             <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
                                 <canvas id="diagnosisChart" class="w-60 h-28"></canvas>
                             </div>
+                        </div>
+                    </div>
+                    <div id="aiAdviceContainer" class="mt-6 hidden w-full">
+                        <h5 class="text-sm font-semibold mb-2 text-blue-700">🤖 Trí tuệ nhân tạo khuyên bạn:
+                        </h5>
+                        <div id="aiAdviceContent"
+                            class="text-gray-800 text-sm bg-blue-50 rounded p-5 border border-blue-200 leading-relaxed">
+                            Đang lấy lời khuyên cá nhân hóa...
                         </div>
                     </div>
                 </div>
