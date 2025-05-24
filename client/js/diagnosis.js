@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showLoading() {
         resultContainer.classList.remove('hidden');
+
+        document.getElementById('aiAdviceContainer').classList.add('hidden');
+        document.getElementById('aiAdviceContent').innerHTML = '';
+
         resultContent.innerHTML = `
             <canvas id="diagnosisChart" class="w-32 h-32 absolute top-4 right-4"></canvas>
 
@@ -72,11 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 <span class="ml-3 text-gray-700 light:text-gray-300">Đang phân tích dữ liệu...</span>
             </div>
         `;
+        resultContainer.scrollIntoView({
+            behavior: 'smooth'
+        });
     }
 
     function fetchDiagnosisResult() {
 
-        fetch('https://a6b4-101-53-36-58.ngrok-free.app/predict', {
+        fetch('https://9e3b-2405-4802-9193-d910-4686-6844-9c19-74a4.ngrok-free.app/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 console.log("Data nhận về:", data);
                 displayResult(data);
+
 
             })
             .catch(error => {
@@ -154,14 +162,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Hiển thị phần nguy cơ tiểu đường
         resultContent.innerHTML = `
-        <div class="mb-6 text-center">
+        <div class="w-full flex flex-col items-center mb-6 text-center">
             <div class="inline-block rounded-full bg-gray-100 light:bg-gray-700 p-3 mb-3">
                 <svg class="h-8 w-8 ${riskClass}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+            <h4 class="flex justify-center items-center text-xl font-bold mb-2 text-gray-900 dark:text-white">
             Nguy cơ tiểu đường:
             <span class="ml-2 px-2 py-1 rounded-full ${riskClass} bg-opacity-10 border ${riskClass.replace('text-', 'border-')}"> 
             ${riskLevel} (${percentage}%)
@@ -170,8 +178,18 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         ${recommendation}
     `;
+        const scrollAdviceButton = document.createElement('button');
+        scrollAdviceButton.textContent = '📘 Đọc chi tiết lời khuyên';
+        scrollAdviceButton.className = 'mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition';
+        scrollAdviceButton.onclick = () => {
+            document.getElementById('aiAdviceContainer').scrollIntoView({
+                behavior: 'smooth'
+            });
+        };
+        resultContent.appendChild(scrollAdviceButton);
         resultContainer.classList.remove('hidden');
         resultContainer.classList.add('bg-white', 'light:bg-gray-800', 'shadow-lg', 'rounded-lg', 'p-6', 'relative');
+
 
         // Hiển thị biểu đồ
         setTimeout(() => {
@@ -185,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <h4 class="text-xl font-semibold mb-4 flex items-center text-blue-800">
             🧠 <span class="ml-2">Lời khuyên chi tiết từ AI</span>
         </h4>
-        <div class="space-y-3 text-gray-800 text-[15px] leading-relaxed">
+        <div class="space-y-3 text-gray-800 text-[15px] leading-relaxed text-justify">
             <p><span class="font-semibold text-blue-700">Tóm tắt:</span> ${advice.summary || 'Không có dữ liệu'}</p>
             <p><span class="font-semibold text-blue-700">Mức độ nguy hiểm:</span> ${advice.danger_level || 'Không rõ'}</p>
             <p><span class="font-semibold text-blue-700">Triệu chứng cần theo dõi:</span> ${advice.symptoms_to_watch || 'Không rõ'}</p>
