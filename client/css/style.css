@@ -16,3 +16,185 @@ body {
 .dark .gradient-bg {
     background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 100%);
 }
+
+/* Smooth transitions */
+.transition-all {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card styles */
+.diagnosis-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* Form animation */
+.form-container {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Result animation */
+.result-container {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.result-container.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Advice section */
+.advice-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.advice-section.active {
+    opacity: 1;
+    max-height: 2000px;
+    /* Đủ lớn để hiển thị nội dung */
+    margin-top: 2rem;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    border: 4px solid rgba(0, 102, 179, 0.1);
+    border-left-color: #0066B3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Button styles */
+.primary-button {
+    background-color: #0066B3;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.primary-button:hover {
+    background-color: #004e8a;
+}
+
+.secondary-button {
+    background-color: white;
+    color: #0066B3;
+    border: 1px solid #0066B3;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.secondary-button:hover {
+    background-color: #f0f7ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .diagnosis-layout {
+        flex-direction: column;
+    }
+}
+
+/* Skeleton loading animation nâng cao */
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.skeleton {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right,
+            #f5f7fa 0%,
+            #e4ecf5 20%,
+            #f5f7fa 40%,
+            #f5f7fa 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    border-radius: 4px;
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+}
+
+.skeleton-circle {
+    border-radius: 50%;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Cải thiện hiệu ứng cho text-justify */
+.text-justify {
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* Con trỏ nhấp nháy */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: currentColor;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    color: #0066B3;
+}

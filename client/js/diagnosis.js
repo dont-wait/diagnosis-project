@@ -1,14 +1,38 @@
-let diagnosisChartInstance = null;
+/**
+ * Diagnosis.js
+ * 
+ * Xử lý chức năng chẩn đoán tiểu đường và hiển thị kết quả.
+ */
 
+let diagnosisChartInstance = null;
+let currentRiskPercentage = null;
+let adviceAnimation = null;
 
 document.addEventListener('DOMContentLoaded', function () {
     const diagnosisForm = document.getElementById('diagnosisForm');
-    const resultContainer = document.getElementById('resultContainer');
+    const formCard = document.getElementById('formCard');
+    const resultCard = document.getElementById('resultCard');
+    const adviceCard = document.getElementById('adviceCard');
     const resultContent = document.getElementById('resultContent');
+    const chartContainer = document.getElementById('chartContainer');
+    const aiAdviceContent = document.getElementById('aiAdviceContent');
+    const getAdviceBtn = document.getElementById('getAdviceBtn');
+    const backToFormBtn = document.getElementById('backToFormBtn');
+    const hideAdviceBtn = document.getElementById('hideAdviceBtn');
 
     const genderSelect = document.getElementById('gender');
     const pregnanciesInput = document.getElementById('pregnancies');
 
+    // Khởi tạo đối tượng AdviceAnimation
+    adviceAnimation = new AdviceAnimation({
+        container: aiAdviceContent,
+        typingSpeed: 25,
+        onComplete: () => {
+            console.log('Animation completed');
+        }
+    });
+
+    // Gender change handler
     genderSelect.addEventListener('change', function () {
         if (genderSelect.value === 'male') {
             pregnanciesInput.value = 0;
@@ -21,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Form submit handler
     diagnosisForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -33,9 +58,31 @@ document.addEventListener('DOMContentLoaded', function () {
             diagnosisChartInstance = null;
         }
 
+        // Hide advice card
+        adviceCard.classList.remove('active');
 
-        showLoading();
-        setTimeout(fetchDiagnosisResult, 2000);
+        // Dừng animation nếu đang chạy
+        if (adviceAnimation) {
+            adviceAnimation.stop();
+        }
+
+        // Show loading and fetch results
+        showLoadingWithSkeleton();
+    });
+
+    // Back to form button handler
+    backToFormBtn.addEventListener('click', function () {
+        resetView();
+    });
+
+    // Get advice button handler
+    getAdviceBtn.addEventListener('click', function () {
+        fetchAdvice();
+    });
+
+    // Hide advice button handler
+    hideAdviceBtn.addEventListener('click', function () {
+        adviceCard.classList.remove('active');
     });
 
     function validateForm() {
@@ -59,31 +106,88 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
-    function showLoading() {
-        resultContainer.classList.remove('hidden');
+    function showLoadingWithSkeleton() {
+        // Hide form card with smooth transition
+        formCard.style.opacity = '0';
 
-        document.getElementById('aiAdviceContainer').classList.add('hidden');
-        document.getElementById('aiAdviceContent').innerHTML = '';
+        setTimeout(() => {
+            formCard.classList.add('hidden');
 
-        resultContent.innerHTML = `
-            <canvas id="diagnosisChart" class="w-32 h-32 absolute top-4 right-4"></canvas>
+            // Show result card with skeleton loading
+            resultCard.classList.remove('hidden');
 
-            <div class="flex justify-center items-center py-4">
-                <svg class="animate-spin h-8 w-8 text-primary light:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span class="ml-3 text-gray-700 light:text-gray-300">Đang phân tích dữ liệu...</span>
-            </div>
-        `;
-        resultContainer.scrollIntoView({
-            behavior: 'smooth'
-        });
+            // Insert skeleton loading for result content
+            resultContent.innerHTML = `
+                <div class="p-5 bg-gray-100 rounded-lg mb-6">
+                    <div class="flex flex-col items-center text-center mb-4">
+                        <div class="skeleton w-20 h-20 skeleton-circle mb-3"></div>
+                        <div class="skeleton w-32 h-6 mb-2"></div>
+                        <div class="skeleton w-24 h-4"></div>
+                    </div>
+                    <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="skeleton h-full w-full"></div>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-0.5">
+                            <div class="skeleton w-5 h-5 skeleton-circle"></div>
+                        </div>
+                        <div class="ml-3 w-full">
+                            <div class="skeleton w-32 h-4 mb-2"></div>
+                            <div class="skeleton w-full h-3 mb-1"></div>
+                            <div class="skeleton w-4/5 h-3"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Insert skeleton loading for chart
+            chartContainer.innerHTML = `
+                <div class="flex items-center justify-center">
+                    <div class="skeleton w-40 h-40 skeleton-circle"></div>
+                </div>
+            `;
+
+            // Activate result card with animation
+            setTimeout(() => {
+                resultCard.classList.add('active');
+
+                // Scroll to result card
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Fetch results after animation completes
+                setTimeout(fetchDiagnosisResult, 1500); // Longer delay to show skeleton
+            }, 50);
+        }, 400);
+    }
+
+    function resetView() {
+        // Hide result card with animation
+        resultCard.classList.remove('active');
+        adviceCard.classList.remove('active');
+
+        // Dừng animation nếu đang chạy
+        if (adviceAnimation) {
+            adviceAnimation.stop();
+        }
+
+        setTimeout(() => {
+            resultCard.classList.add('hidden');
+
+            // Show form card with animation
+            formCard.classList.remove('hidden');
+            setTimeout(() => {
+                formCard.style.opacity = '1';
+
+                // Scroll to form card
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 50);
+        }, 400);
     }
 
     function fetchDiagnosisResult() {
-
-        fetch('https://9e3b-2405-4802-9193-d910-4686-6844-9c19-74a4.ngrok-free.app/predict', {
+        fetch('http://localhost:5000/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,121 +204,294 @@ document.addEventListener('DOMContentLoaded', function () {
             }),
         })
             .then(response => {
-                console.log("Response object:", response);
                 if (!response.ok) {
                     throw new Error("Phản hồi không hợp lệ từ server");
                 }
                 return response.json();
             })
             .then(data => {
-                console.log("Data nhận về:", data);
                 displayResult(data);
-
-
             })
             .catch(error => {
                 console.error("Có lỗi xảy ra:", error);
                 resultContent.innerHTML = `
-                <div class="p-4 bg-red-50 light:bg-red-900/30 rounded-lg text-red-600 light:text-red-400">
-                    Đã xảy ra lỗi trong quá trình chẩn đoán. Vui lòng thử lại sau.
-                </div>
-            `;
+                    <div class="p-4 bg-red-50 rounded-lg text-red-600 border border-red-200">
+                        <div class="flex items-center mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h4 class="font-medium">Đã xảy ra lỗi</h4>
+                        </div>
+                        <p class="text-sm ml-7">Không thể kết nối đến máy chủ. Vui lòng thử lại sau.</p>
+                    </div>
+                `;
+
+                // Clear chart skeleton
+                chartContainer.innerHTML = `
+                    <div class="flex flex-col items-center justify-center p-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="text-sm text-gray-500">Không thể tải biểu đồ</p>
+                    </div>
+                `;
             });
     }
 
     function displayResult(data) {
         const percentage = data.risk_percentage;
-        const advice = data.advice || {};
+        currentRiskPercentage = percentage;
+
         let riskLevel = '';
         let riskClass = '';
-        let riskDescription = '';
+        let riskBg = '';
         let recommendation = '';
 
         if (percentage >= 75) {
             riskLevel = "RẤT CAO";
-            riskClass = "text-red-700 light:text-red-400";
+            riskClass = "text-red-700";
+            riskBg = "bg-red-50 border-red-200";
             recommendation = `
-            <div class="mt-4 p-4 bg-red-100 light:bg-red-900/30 rounded-lg text-red-800 light:text-red-300 border border-red-400 light:border-red-600">
-                🚨 <strong>Khuyến nghị khẩn cấp:</strong> Vui lòng đến bệnh viện chuyên khoa nội tiết để làm xét nghiệm đường huyết, HbA1c và được tư vấn điều trị. Không được chủ quan!
+            <div class="mt-6 p-4 bg-red-50 rounded-lg text-red-800 border border-red-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">Khuyến nghị khẩn cấp:</h3>
+                        <div class="mt-2 text-sm text-red-700 text-justify">
+                            <p>Vui lòng đến bệnh viện chuyên khoa nội tiết để làm xét nghiệm đường huyết, HbA1c và được tư vấn điều trị. Không được chủ quan!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
         } else if (percentage >= 50) {
             riskLevel = "TRUNG BÌNH";
-            riskClass = "text-orange-600 light:text-orange-400";
-            riskDescription = `
-            Hệ thống cho thấy bạn có <strong>${percentage}%</strong> nguy cơ mắc bệnh tiểu đường. 
-            Bạn hiện đang ở <strong>giai đoạn tiền tiểu đường</strong> – nếu không điều chỉnh lối sống, bệnh có thể phát triển âm thầm và gây biến chứng sau vài năm.
-        `;
+            riskClass = "text-orange-700";
+            riskBg = "bg-orange-50 border-orange-200";
             recommendation = `
-            <div class="mt-4 p-4 bg-orange-100 light:bg-orange-900/30 rounded-lg text-orange-800 light:text-orange-300 border border-orange-400 light:border-orange-600">
-                ⚠️ <strong>Khuyến nghị:</strong> Hạn chế đường, tinh bột, nước ngọt và bắt đầu tập luyện đều đặn mỗi ngày. Theo dõi đường huyết ít nhất mỗi 3 tháng.
+            <div class="mt-6 p-4 bg-orange-50 rounded-lg text-orange-800 border border-orange-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-orange-800">Khuyến nghị:</h3>
+                        <div class="mt-2 text-sm text-orange-700 text-justify">
+                            <p>Hạn chế đường, tinh bột, nước ngọt và bắt đầu tập luyện đều đặn mỗi ngày. Theo dõi đường huyết ít nhất mỗi 3 tháng.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
         } else {
             riskLevel = "THẤP";
-            riskClass = "text-green-600 light:text-green-400";
+            riskClass = "text-green-700";
+            riskBg = "bg-green-50 border-green-200";
             recommendation = `
-            <div class="mt-4 p-4 bg-green-100 light:bg-green-900/30 rounded-lg text-green-800 light:text-green-300 border border-green-400 light:border-green-600">
-                ✅ <strong>Lời khuyên:</strong> Tiếp tục duy trì ăn uống khoa học, tập thể dục, và khám sức khỏe định kỳ.
+            <div class="mt-6 p-4 bg-green-50 rounded-lg text-green-800 border border-green-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">Lời khuyên:</h3>
+                        <div class="mt-2 text-sm text-green-700 text-justify">
+                            <p>Tiếp tục duy trì ăn uống khoa học, tập thể dục, và khám sức khỏe định kỳ.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
         }
 
-        // Hiển thị phần nguy cơ tiểu đường
+        // Hiển thị kết quả với thiết kế mới
         resultContent.innerHTML = `
-        <div class="w-full flex flex-col items-center mb-6 text-center">
-            <div class="inline-block rounded-full bg-gray-100 light:bg-gray-700 p-3 mb-3">
-                <svg class="h-8 w-8 ${riskClass}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+        <div class="p-5 ${riskBg} rounded-lg mb-6">
+            <div class="flex flex-col items-center text-center mb-4">
+                <div class="text-4xl font-bold ${riskClass} mb-2">${percentage}%</div>
+                <div class="text-xl font-semibold ${riskClass}">Nguy cơ ${riskLevel}</div>
             </div>
-            <h4 class="flex justify-center items-center text-xl font-bold mb-2 text-gray-900 dark:text-white">
-            Nguy cơ tiểu đường:
-            <span class="ml-2 px-2 py-1 rounded-full ${riskClass} bg-opacity-10 border ${riskClass.replace('text-', 'border-')}"> 
-            ${riskLevel} (${percentage}%)
-            </span>
-            </h4>
+            <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full ${percentage >= 75 ? 'bg-red-500' : percentage >= 50 ? 'bg-orange-500' : 'bg-green-500'}" style="width: ${percentage}%"></div>
+            </div>
         </div>
         ${recommendation}
     `;
-        const scrollAdviceButton = document.createElement('button');
-        scrollAdviceButton.textContent = '📘 Đọc chi tiết lời khuyên';
-        scrollAdviceButton.className = 'mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition';
-        scrollAdviceButton.onclick = () => {
-            document.getElementById('aiAdviceContainer').scrollIntoView({
-                behavior: 'smooth'
-            });
-        };
-        resultContent.appendChild(scrollAdviceButton);
-        resultContainer.classList.remove('hidden');
-        resultContainer.classList.add('bg-white', 'light:bg-gray-800', 'shadow-lg', 'rounded-lg', 'p-6', 'relative');
 
+        // Prepare chart container
+        chartContainer.innerHTML = `<canvas id="diagnosisChart" class="w-full h-40"></canvas>`;
 
         // Hiển thị biểu đồ
         setTimeout(() => {
             createDiagnosisChart(percentage);
         }, 100);
-
-        // Hiển thị lời khuyên từ AI
-        document.getElementById('aiAdviceContainer').classList.remove('hidden');
-        document.getElementById('aiAdviceContent').innerHTML = `
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
-        <h4 class="text-xl font-semibold mb-4 flex items-center text-blue-800">
-            🧠 <span class="ml-2">Lời khuyên chi tiết từ AI</span>
-        </h4>
-        <div class="space-y-3 text-gray-800 text-[15px] leading-relaxed text-justify">
-            <p><span class="font-semibold text-blue-700">Tóm tắt:</span> ${advice.summary || 'Không có dữ liệu'}</p>
-            <p><span class="font-semibold text-blue-700">Mức độ nguy hiểm:</span> ${advice.danger_level || 'Không rõ'}</p>
-            <p><span class="font-semibold text-blue-700">Triệu chứng cần theo dõi:</span> ${advice.symptoms_to_watch || 'Không rõ'}</p>
-            <p><span class="font-semibold text-blue-700">Hành động cần thực hiện ngay:</span> ${advice.immediate_actions || 'Không rõ'}</p>
-            <p><span class="font-semibold text-blue-700">Chế độ ăn uống khuyến nghị:</span> ${advice.diet || 'Không rõ'}</p>
-            <p><span class="font-semibold text-blue-700">Thời điểm cần đi khám:</span> ${advice.doctor_visit_timing || 'Không rõ'}</p>
-        </div>
-    </div>
-`;
     }
 
+    function fetchAdvice() {
+        if (!currentRiskPercentage) {
+            console.error("Không có dữ liệu về tỷ lệ rủi ro");
+            return;
+        }
+
+        // Hiển thị advice card với skeleton loading
+        adviceCard.classList.add('active');
+
+        // Show skeleton loading for advice
+        aiAdviceContent.innerHTML = `
+            <div class="space-y-4">
+            <!-- Thanh tiến trình skeleton -->
+            <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-2 mb-6">
+                <div class="skeleton h-full w-2/5"></div>
+            </div>
+            
+            <!-- Tóm tắt skeleton -->
+            <div class="mb-6 pb-4 border-b border-blue-200">
+                <div class="skeleton w-32 h-5 mb-3"></div>
+                <div class="skeleton w-full h-3 mb-2 animate-pulse"></div>
+                <div class="skeleton w-5/6 h-3 mb-2 animate-pulse"></div>
+                <div class="skeleton w-4/5 h-3 animate-pulse"></div>
+            </div>
+            
+            <!-- Grid layout skeleton với nhiều chi tiết hơn -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Mức độ nguy hiểm -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <div class="skeleton w-4 h-4 skeleton-circle mr-1"></div>
+                        <div class="skeleton w-40 h-4"></div>
+                    </div>
+                    <div class="skeleton w-full h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-4/5 h-3 animate-pulse"></div>
+                </div>
+                
+                <!-- Triệu chứng cần theo dõi -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <div class="skeleton w-4 h-4 skeleton-circle mr-1"></div>
+                        <div class="skeleton w-48 h-4"></div>
+                    </div>
+                    <div class="skeleton w-full h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-3/4 h-3 animate-pulse"></div>
+                </div>
+                
+                <!-- Hành động cần thực hiện -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <div class="skeleton w-4 h-4 skeleton-circle mr-1"></div>
+                        <div class="skeleton w-56 h-4"></div>
+                    </div>
+                    <div class="skeleton w-full h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-5/6 h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-4/6 h-3 animate-pulse"></div>
+                </div>
+                
+                <!-- Chế độ ăn uống -->
+                <div>
+                    <div class="flex items-center mb-2">
+                        <div class="skeleton w-4 h-4 skeleton-circle mr-1"></div>
+                        <div class="skeleton w-52 h-4"></div>
+                    </div>
+                    <div class="skeleton w-full h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-4/5 h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-3/5 h-3 animate-pulse"></div>
+                </div>
+                
+                <!-- Thời điểm khám -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-2">
+                        <div class="skeleton w-4 h-4 skeleton-circle mr-1"></div>
+                        <div class="skeleton w-44 h-4"></div>
+                    </div>
+                    <div class="skeleton w-full h-3 mb-1 animate-pulse"></div>
+                    <div class="skeleton w-3/4 h-3 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+        // Cuộn đến advice card
+        setTimeout(() => {
+            adviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+
+        // Gọi API để lấy lời khuyên
+        fetch('http://localhost:5000/get-advice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                risk_percentage: parseFloat(currentRiskPercentage)
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`Server trả về lỗi ${response.status}: ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Delay to show skeleton loading
+                setTimeout(() => {
+                    displayAdviceWithAnimation(data.advice);
+                }, 1000);
+            })
+            .catch(error => {
+                console.error("Có lỗi xảy ra khi lấy lời khuyên:", error);
+                // Nếu có lỗi, hiển thị lời khuyên mô phỏng sau một khoảng thời gian
+                setTimeout(() => {
+                    const mockAdvice = generateMockAdvice(currentRiskPercentage);
+                    displayAdviceWithAnimation(mockAdvice);
+                }, 1000);
+            });
+    }
+
+    function displayAdviceWithAnimation(advice) {
+        // Sử dụng đối tượng AdviceAnimation để hiển thị lời khuyên với hiệu ứng đánh máy
+        adviceAnimation.animateAdvice(advice);
+    }
+
+    function generateMockAdvice(riskPercentage) {
+        if (riskPercentage >= 75) {
+            return {
+                danger_level: "Rất cao - Cần can thiệp y tế ngay lập tức",
+                immediate_actions: "Đến gặp bác sĩ nội tiết ngay lập tức, kiểm tra đường huyết và HbA1c, tuân thủ chế độ ăn kiêng nghiêm ngặt",
+                diet: "Loại bỏ hoàn toàn đường tinh luyện, giảm tinh bột xuống dưới 100g/ngày, ưu tiên rau xanh, protein nạc và chất béo lành mạnh",
+                symptoms_to_watch: "Khát nước liên tục, đi tiểu nhiều, mệt mỏi bất thường, mờ mắt, vết thương lâu lành",
+                doctor_visit_timing: "Ngay lập tức - trong vòng 24-48 giờ",
+                summary: "Bạn đang ở nguy cơ rất cao mắc bệnh tiểu đường. Cần can thiệp y tế ngay lập tức để ngăn ngừa các biến chứng nghiêm trọng."
+            };
+        } else if (riskPercentage >= 50) {
+            return {
+                danger_level: "Trung bình đến cao - Cần thay đổi lối sống ngay lập tức",
+                immediate_actions: "Giảm lượng đường và carbohydrate tinh chế, tăng cường hoạt động thể chất, theo dõi đường huyết định kỳ",
+                diet: "Giảm tinh bột xuống 150g/ngày, tăng protein nạc, chất xơ và chất béo lành mạnh, chia nhỏ bữa ăn",
+                symptoms_to_watch: "Mệt mỏi sau khi ăn, thèm ăn ngọt, tăng cân bất thường, đi tiểu nhiều",
+                doctor_visit_timing: "Trong vòng 1-2 tuần để kiểm tra đường huyết và HbA1c",
+                summary: "Bạn đang ở giai đoạn tiền tiểu đường. Thay đổi lối sống ngay bây giờ có thể giúp ngăn ngừa tiến triển thành bệnh tiểu đường type 2."
+            };
+        } else {
+            return {
+                danger_level: "Thấp - Tiếp tục duy trì lối sống lành mạnh",
+                immediate_actions: "Duy trì chế độ ăn cân bằng, tập thể dục đều đặn, theo dõi cân nặng",
+                diet: "Chế độ ăn cân bằng với nhiều rau, trái cây, ngũ cốc nguyên hạt, protein nạc và chất béo lành mạnh",
+                symptoms_to_watch: "Không có triệu chứng cụ thể cần theo dõi, nhưng vẫn nên chú ý đến bất kỳ thay đổi bất thường nào",
+                doctor_visit_timing: "Kiểm tra sức khỏe định kỳ hàng năm",
+                summary: "Nguy cơ tiểu đường của bạn hiện tại thấp. Tiếp tục duy trì lối sống lành mạnh để giữ nguy cơ ở mức thấp."
+            };
+        }
+    }
 
     function createDiagnosisChart(percentage) {
         const chartCanvas = document.getElementById('diagnosisChart');
@@ -233,25 +510,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const centerTextPlugin = {
             id: 'centerText',
             beforeDraw: function (chart) {
-                const { width } = chart;
+                const { width, height } = chart;
                 const { ctx } = chart;
                 ctx.restore();
+
+                // Percentage text
                 const fontSize = (width / 8).toFixed(0);
-                ctx.font = `${fontSize}px sans-serif`;
+                ctx.font = `bold ${fontSize}px sans-serif`;
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'center';
-                ctx.fillStyle = '#111';
+                ctx.fillStyle = percentage >= 75 ? '#b91c1c' : percentage >= 50 ? '#c2410c' : '#15803d';
                 const text = percentage + '%';
-                const textX = chart.height / 2;
-                const textY = chart.height / 2;
-                ctx.fillText(text, textX, textY);
+                ctx.fillText(text, width / 2, height / 2);
+
+                // Label text
+                const labelFontSize = (width / 16).toFixed(0);
+                ctx.font = `${labelFontSize}px sans-serif`;
+                ctx.fillStyle = '#6b7280';
+                ctx.fillText('Nguy cơ', width / 2, height / 2 + parseInt(fontSize) + 5);
+
                 ctx.save();
             }
         };
 
-        const riskColor = percentage >= 75 ? '#dc2626' : percentage >= 50 ? '#f97316' : '#16a34a';
+        const riskColor = percentage >= 75 ? '#ef4444' : percentage >= 50 ? '#f97316' : '#22c55e';
 
-        // Create new chart
+        // Create new chart with improved design and animation
         diagnosisChartInstance = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -262,23 +546,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         riskColor,
                         '#e5e7eb'
                     ],
-                    borderWidth: 1
+                    borderWidth: 0,
+                    borderRadius: 5,
+                    hoverOffset: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                cutout: '70%',
+                cutout: '75%',
                 plugins: {
                     legend: { display: false },
                     tooltip: { enabled: false },
                     centerText: true
+                },
+                animation: {
+                    animateRotate: true,
+                    animateScale: true,
+                    duration: 1000,
+                    easing: 'easeOutQuart'
                 }
             },
             plugins: [centerTextPlugin]
         });
-
-        console.log("New chart created:", diagnosisChartInstance);
     }
-
 });

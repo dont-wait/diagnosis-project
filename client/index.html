@@ -10,6 +10,7 @@
     <meta name="description"
         content="Hệ thống chẩn đoán bệnh tiểu đường dựa trên học máy, giúp phát hiện sớm dấu hiệu tiểu đường.">
     <title>Chẩn đoán bệnh tiểu đường dựa trên học máy</title>
+    <link type="image/png" sizes="32x32" rel="icon" href="images/icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -168,7 +169,7 @@
     </section>
 
     <!-- Diagnosis Tool Section -->
-    <section id="diagnosis" class="py-16">
+    <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold text-primary light:text-blue-400">Công Cụ Chẩn Đoán</h2>
@@ -176,9 +177,21 @@
                     Nhập thông tin sức khỏe của bạn để nhận kết quả đánh giá nguy cơ tiểu đường dựa trên học máy.
                 </p>
             </div>
-            <div class="flex flex-col gap-8 items-center">
-                <div class="w-full md:w-1/2 bg-white light:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+
+            <!-- Main diagnosis container -->
+            <div class="diagnosis-container max-w-6xl mx-auto">
+                <!-- Form Card -->
+                <div id="formCard" class="diagnosis-card mb-8 transition-all">
                     <div class="p-6 md:p-8">
+                        <h3 id="diagnosis" class="text-xl font-semibold text-primary mb-6 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            Nhập thông tin sức khỏe
+                        </h3>
+
                         <!-- Form  -->
                         <form id="diagnosisForm" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -198,8 +211,7 @@
                                 <div>
                                     <label for="pregnancies"
                                         class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Số lần
-                                        mang
-                                        thai</label>
+                                        mang thai</label>
                                     <input type="number" id="pregnancies" name="pregnancies" min="0" max="20" step="1"
                                         placeholder="VD: 2"
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
@@ -210,8 +222,7 @@
                                 <div>
                                     <label for="glucose"
                                         class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Đường
-                                        huyết
-                                        lúc đói (mg/dL)</label>
+                                        huyết lúc đói (mg/dL)</label>
                                     <input type="number" id="glucose" name="glucose" min="70" max="300" step="1"
                                         placeholder="VD: 121"
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
@@ -222,8 +233,7 @@
                                 <div>
                                     <label for="blood_pressure"
                                         class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Huyết
-                                        áp
-                                        (mmHg)</label>
+                                        áp (mmHg)</label>
                                     <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="200"
                                         step="1" placeholder="VD: 72"
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
@@ -234,8 +244,7 @@
                                 <div>
                                     <label for="skin_thickness"
                                         class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Độ dày
-                                        da
-                                        (mm)</label>
+                                        da (mm)</label>
                                     <input type="number" id="skin_thickness" name="skin_thickness" min="0" max="100"
                                         step="1" placeholder="VD: 23"
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
@@ -268,8 +277,7 @@
                                 <div>
                                     <label for="diabetesPedigreeFunction"
                                         class="block text-sm font-medium text-gray-700 light:text-gray-300 mb-1">Chỉ số
-                                        di
-                                        truyền (DPF)</label>
+                                        di truyền (DPF)</label>
                                     <input type="number" id="diabetesPedigreeFunction" name="diabetesPedigreeFunction"
                                         min="0.0" max="2.5" step="0.001" placeholder="VD: 0.372"
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
@@ -285,67 +293,114 @@
                                         class="w-full px-4 py-2 border border-gray-300 light:border-gray-600 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 light:bg-gray-700 light:text-white"
                                         required>
                                 </div>
-
                             </div>
 
                             <div class="flex justify-center pt-4">
-                                <button type="submit"
-                                    class="px-8 py-3 bg-primary light:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 light:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150">
+                                <button type="submit" class="primary-button">
                                     Chẩn đoán ngay
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
 
-                <div id="resultContainer"
-                    class="w-full max-w-5xl mt-8 bg-white rounded-xl shadow-lg overflow-hidden hidden border border-gray-200">
+                <!-- Results Card - Initially hidden -->
+                <div id="resultCard" class="diagnosis-card result-container hidden">
+                    <div class="p-6 md:p-8">
+                        <!-- Header with back button -->
+                        <div class="flex justify-between items-center mb-6 border-b pb-4">
+                            <h3 class="text-xl font-semibold text-primary flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                                Kết quả chẩn đoán
+                            </h3>
+                            <button id="backToFormBtn"
+                                class="text-gray-500 hover:text-gray-700 flex items-center text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                Quay lại
+                            </button>
+                        </div>
 
-                    <!-- Tiêu đề ở giữa -->
-                    <div class="text-center py-6 border-b border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-900">🩺 Kết quả chẩn đoán</h3>
-                    </div>
+                        <!-- Results content -->
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <!-- Left: Analysis content -->
+                            <div class="flex-1">
+                                <div id="resultContent" class="mb-6">
+                                    <!-- Skeleton loading will be inserted here -->
+                                </div>
 
-                    <!-- Nội dung chính: trái phải -->
-                    <div class="flex flex-col md:flex-row p-6 md:p-8 gap-8">
+                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-justify">
+                                    <h4 class="font-medium text-gray-900 mb-2">⚠️ Lưu ý quan trọng:</h4>
+                                    <p class="text-sm text-gray-600 leading-relaxed">
+                                        Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa
+                                        chuyên
+                                        nghiệp. Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
+                                    </p>
+                                </div>
+                            </div>
 
-                        <!-- Bên trái: nội dung phân tích -->
-                        <div class="flex-1 flex flex-col justify-between">
-                            <div id="resultContent" class="mb-4"></div>
-                            <div id="resultDetails"
-                                class="p-4 bg-gray-50 rounded-lg mb-4 border border-gray-200 text-justify">
-                                <h4 class="font-medium text-gray-900 mb-2">⚠️ Lưu ý quan trọng:</h4>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    Kết quả này chỉ mang tính tham khảo và không thay thế cho chẩn đoán y khoa chuyên
-                                    nghiệp.
-                                    Vui lòng tham khảo ý kiến bác sĩ để được tư vấn chính xác.
-                                </p>
+                            <!-- Right: Chart -->
+                            <div class="w-full md:w-1/3">
+                                <div id="chartContainer" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                    <!-- Skeleton chart will be inserted here -->
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Bên phải: biểu đồ -->
-                        <div class="w-full md:w-1/3 flex justify-center self-end">
-                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mt-2">
-                                <canvas id="diagnosisChart" class="w-60 h-28"></canvas>
-                            </div>
+                        <!-- Get advice button -->
+                        <div class="mt-8 flex justify-center">
+                            <button id="getAdviceBtn" class="secondary-button flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Nhận lời khuyên chi tiết
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Dưới: lời khuyên AI -->
-                    <div id="aiAdviceContainer" class="mb-6 px-6 md:px-10 hidden w-full">
-                        <h5 class="text-base font-semibold mb-3 text-blue-700">🤖 Trí tuệ nhân tạo khuyên bạn:</h5>
+                <!-- AI Advice Card - Separate section -->
+                <div id="adviceCard" class="diagnosis-card advice-section">
+                    <div class="p-6 md:p-8">
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-6 border-b pb-4">
+                            <h3 class="text-xl font-semibold text-blue-600 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                                Lời khuyên từ AI
+                            </h3>
+                            <button id="hideAdviceBtn"
+                                class="text-gray-500 hover:text-gray-700 flex items-center text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Ẩn
+                            </button>
+                        </div>
+
+                        <!-- Advice content -->
                         <div id="aiAdviceContent"
-                            class="text-gray-800 text-sm bg-blue-50 rounded p-5 border border-blue-200 leading-relaxed text-justify">
-                            Đang lấy lời khuyên cá nhân hóa...
+                            class="text-gray-800 bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500">
+                            <!-- Skeleton loading will be inserted here -->
                         </div>
                     </div>
-
                 </div>
-
-
-
             </div>
+        </div>
     </section>
 
     <!-- How it Works Section -->
@@ -439,7 +494,10 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/typing-animation.js"></script>
+    <script src="js/advice-animation.js"></script>
     <script src="js/diagnosis.js"></script>
+
 </body>
 
 </html>
