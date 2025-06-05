@@ -21,7 +21,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Tải mô hình
 try:
-    model = joblib.load("../server/models/modelV3.pkl")
+    model = joblib.load("../server/models/modelV2.pth")
     logger.info("Mô hình đã được tải thành công")
 except Exception as e:
     logger.error(f"Lỗi khi tải mô hình: {str(e)}")
