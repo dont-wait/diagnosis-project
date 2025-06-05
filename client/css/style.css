@@ -48,18 +48,12 @@ body {
     transform: translateY(0);
 }
 
-/* Advice section */
-.advice-section {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.advice-section.active {
+
+.advice-section {
     opacity: 1;
-    max-height: 2000px;
-    /* Đủ lớn để hiển thị nội dung */
+    max-height: none;
+    overflow: visible;
     margin-top: 2rem;
 }
 
@@ -173,6 +167,26 @@ body {
 .text-justify {
     text-align: justify;
     hyphens: auto;
+}
+
+#chartContainer {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#diagnosisChart {
+    width: 100% !important;
+    height: auto !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Con trỏ nhấp nháy */
