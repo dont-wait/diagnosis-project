@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm lấy kết quả chẩn đoán
     function fetchDiagnosisResult() {
-        fetch('http://localhost:5000/predict', {
+        fetch('https://diagnosis-project.onrender.com/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         // Gọi API để lấy lời khuyên
-        fetch('http://localhost:5000/get-advice', {
+        fetch('https://diagnosis-project.onrender.com/get-advice', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
