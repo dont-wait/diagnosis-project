@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm lấy kết quả chẩn đoán
     function fetchDiagnosisResult() {
-        fetch('https://diagnosis-project.onrender.com/predict', {
+        fetch('http://localhost:5000/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
