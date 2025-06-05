@@ -26,7 +26,9 @@ try:
 except Exception as e:
     logger.error(f"Lỗi khi tải mô hình: {str(e)}")
     model = None
-
+@app.route('/')
+def hello():
+    return "Chào mừng đến với API dự đoán bệnh tiểu đường!"
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
