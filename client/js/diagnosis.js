@@ -81,22 +81,22 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="p-5 bg-gray-100 rounded-lg mb-6">
                 <div class="flex flex-col items-center text-center mb-4">
                     <div class="skeleton w-20 h-20 skeleton-circle mb-3"></div>
-                    <div class="skeleton w-32 h-6 mb-2"></div>
-                    <div class="skeleton w-24 h-4"></div>
+                    <div class="skeleton w-full h-6 mb-2"></div>
+                    <div class="skeleton w-full h-4"></div>
                 </div>
-                <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-4 bg-gray-200 rounded-full overflow-hidden w-full">
                     <div class="skeleton h-full w-full"></div>
                 </div>
             </div>
-            <div class="mt-6 p-4 bg-gray-100 rounded-lg">
-                <div class="flex items-start">
+            <div class="mt-6 p-4 bg-gray-100 rounded-lg w-full">
+                <div class="flex items-start w-full">
                     <div class="flex-shrink-0 mt-0.5">
                         <div class="skeleton w-5 h-5 skeleton-circle"></div>
                     </div>
                     <div class="ml-3 w-full">
-                        <div class="skeleton w-32 h-4 mb-2"></div>
+                        <div class="skeleton w-full h-4 mb-2"></div>
                         <div class="skeleton w-full h-3 mb-1"></div>
-                        <div class="skeleton w-4/5 h-3"></div>
+                        <div class="skeleton w-full h-3"></div>
                     </div>
                 </div>
             </div>
