@@ -67,15 +67,6 @@ body {
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 /* Button styles */
 .primary-button {
@@ -105,10 +96,13 @@ body {
     background-color: #f0f7ff;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .diagnosis-layout {
-        flex-direction: column;
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 
@@ -211,4 +205,20 @@ body {
     animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
     color: #0066B3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .diagnosis-layout {
+        flex-direction: column;
+    }
+
+    .chartContainer {
+        height: 300px;
+    }
+
+    #diagnosisChart {
+        width: 90% !important;
+        height: auto !important;
+    }
 }

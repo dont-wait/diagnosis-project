@@ -1,17 +1,17 @@
 /**
  * Diagnosis.js
- * 
+ *
  * Xử lý chức năng chẩn đoán tiểu đường và hiển thị kết quả.
  */
 
-let diagnosisChartInstance = null;
+const API_URL = 'https://diagnosis-project.onrender.com';
+
 let currentRiskPercentage = null;
 let adviceAnimation = null;
 
 document.addEventListener('DOMContentLoaded', function () {
     const diagnosisForm = document.getElementById('diagnosisForm');
     const formCard = document.getElementById('formCard');
-    const resultAndAdviceCard = document.getElementById('resultAndAdviceCard'); // Cập nhật ID
     const resultContent = document.getElementById('resultContent');
     const chartContainer = document.getElementById('chartContainer');
     const aiAdviceContent = document.getElementById('aiAdviceContent');
@@ -114,42 +114,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm lấy kết quả chẩn đoán
     function fetchDiagnosisResult() {
-        fetch('http://localhost:5000/predict', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                pregnancies: parseInt(pregnanciesInput.value),
-                glucose: parseInt(document.getElementById('glucose').value),
-                blood_pressure: parseInt(document.getElementById('blood_pressure').value),
-                skin_thickness: parseInt(document.getElementById('skin_thickness').value),
-                insulin: parseInt(document.getElementById('insulin').value),
-                bmi: parseFloat(document.getElementById('bmi').value),
-                diabetes_pedigree: parseFloat(document.getElementById('diabetesPedigreeFunction').value),
-                age: parseInt(document.getElementById('age').value)
-            }),
-        })
+        axios.post(`${API_URL}/predict`, {
+            pregnancies: parseInt(pregnanciesInput.value),
+            glucose: parseInt(document.getElementById('glucose').value),
+            blood_pressure: parseInt(document.getElementById('blood_pressure').value),
+            skin_thickness: parseInt(document.getElementById('skin_thickness').value),
+            insulin: parseInt(document.getElementById('insulin').value),
+            bmi: parseFloat(document.getElementById('bmi').value),
+            diabetes_pedigree: parseFloat(document.getElementById('diabetesPedigreeFunction').value),
+            age: parseInt(document.getElementById('age').value)
+        },)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error("Phản hồi không hợp lệ từ server");
-                }
-                return response.json();
-            })
-            .then(data => {
-                displayResult(data);
+                displayResult(response.data);
                 fetchAdvice(); // Lấy lời khuyên sau khi có kết quả
             })
             .catch(error => {
                 console.error("Có lỗi xảy ra:", error);
                 resultContent.innerHTML = `
-                <div class="p-4 bg-red-50 rounded-lg text-red-600 border border-red-200">
-                    <h4 class="font-medium">Đã xảy ra lỗi</h4>
-                    <p class="text-sm ml-7">Không thể kết nối đến máy chủ. Vui lòng thử lại sau.</p>
-                </div>
-            `;
+            <div class="p-4 bg-red-50 rounded-lg text-red-600 border border-red-200">
+                <h4 class="font-medium">Đã xảy ra lỗi</h4>
+                <p class="text-sm ml-7">Không thể kết nối đến máy chủ. Vui lòng thử lại sau.</p>
+            </div>
+        `;
             });
     }
+
 
     // Hàm hiển thị kết quả
     function displayResult(data) {
@@ -160,42 +149,42 @@ document.addEventListener('DOMContentLoaded', function () {
         let riskBg = '';
         let recommendation = '';
 
-        if (percentage >= 75) {
+        if (percentage >= 70) {
             riskLevel = "RẤT CAO";
             riskBg = "bg-red-50 border-red-200";
             recommendation = `
                 <div class="mt-6 p-4 bg-red-50 rounded-lg text-red-800 border border-red-200">
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
                         <div class="ml-3">
                             <h3 class="text-sm font-medium text-red-800">Khuyến nghị khẩn cấp:</h3>
                             <div class="mt-2 text-sm text-red-700 text-justify">
                                 <p>Vui lòng đến bệnh viện chuyên khoa nội tiết để làm xét nghiệm đường huyết, HbA1c và được tư vấn điều trị. Không được chủ quan!</p>
                             </div>
                         </div>
+                        <div class="flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             `;
-        } else if (percentage >= 50) {
+        } else if (percentage >= 40) {
             riskLevel = "TRUNG BÌNH";
             riskBg = "bg-orange-50 border-orange-200";
             recommendation = `
                 <div class="mt-6 p-4 bg-orange-50 rounded-lg text-orange-800 border border-orange-200">
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
                         <div class="ml-3">
                             <h3 class="text-sm font-medium text-orange-800">Khuyến nghị:</h3>
                             <div class="mt-2 text-sm text-orange-700 text-justify">
                                 <p>Hạn chế đường, tinh bột, nước ngọt và bắt đầu tập luyện đều đặn mỗi ngày. Theo dõi đường huyết ít nhất mỗi 3 tháng.</p>
                             </div>
+                        </div>
+                        <div class="flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -206,16 +195,16 @@ document.addEventListener('DOMContentLoaded', function () {
             recommendation = `
                 <div class="mt-6 p-4 bg-green-50 rounded-lg text-green-800 border border-green-200">
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
                         <div class="ml-3">
                             <h3 class="text-sm font-medium text-green-800">Lời khuyên:</h3>
                             <div class="mt-2 text-sm text-green-700 text-justify">
                                 <p>Tiếp tục duy trì ăn uống khoa học, tập thể dục, và khám sức khỏe định kỳ.</p>
                             </div>
+                        </div>
+                        <div class="flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -229,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="text-xl font-semibold">Nguy cơ ${riskLevel}</div>
                 </div>
                 <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
-                    <div class="h-full ${percentage >= 75 ? 'bg-red-500' : percentage >= 50 ? 'bg-orange-500' : 'bg-green-500'}" style="width: ${percentage}%"></div>
+                    <div class="h-full ${percentage >= 70 ? 'bg-red-500' : percentage >= 40 ? 'bg-orange-500' : 'bg-green-500'}" style="width: ${percentage}%"></div>
                 </div>
             </div>
             ${recommendation}
@@ -265,114 +254,22 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         // Gọi API để lấy lời khuyên
-        fetch('https://diagnosis-project.onrender.com/get-advice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
+        axios.post(
+            `${API_URL}/get-advice`,
+            {
                 risk_percentage: parseFloat(currentRiskPercentage)
-            }),
-        })
-            .then(response => response.json())
-            .then(data => {
+            },
+        )
+            .then(response => {
                 // Hiển thị lời khuyên sau khi có dữ liệu
                 setTimeout(() => {
-                    displayAdviceWithAnimation(data.advice);
+                    displayAdviceWithAnimation(response.data.advice);
                 }, 1000);
             })
-            .catch(error => {
-                console.error("Có lỗi xảy ra khi lấy lời khuyên:", error);
-                // Hiển thị lời khuyên giả nếu có lỗi
-                setTimeout(() => {
-                    const mockAdvice = generateMockAdvice(currentRiskPercentage);
-                    displayAdviceWithAnimation(mockAdvice);
-                }, 1000);
-            });
     }
 
     // Hàm hiển thị lời khuyên với hiệu ứng
     function displayAdviceWithAnimation(advice) {
         adviceAnimation.animateAdvice(advice);
-    }
-
-    // Hàm tạo biểu đồ chẩn đoán
-    function createDiagnosisChart(percentage) {
-        const chartCanvas = document.getElementById('diagnosisChart');
-        if (!chartCanvas) {
-            console.error("Chart canvas element not found");
-            return;
-        }
-
-        const ctx = chartCanvas.getContext('2d');
-
-        if (diagnosisChartInstance) {
-            diagnosisChartInstance.destroy();
-            diagnosisChartInstance = null;
-        }
-
-        const centerTextPlugin = {
-            id: 'centerText',
-            beforeDraw: function (chart) {
-                const { width, height } = chart;
-                const { ctx } = chart;
-                ctx.restore();
-
-                // Hiển thị phần trăm tại trung tâm
-                const fontSize = (width / 8).toFixed(0);
-                ctx.font = `bold ${fontSize}px sans-serif`;
-                ctx.textBaseline = 'middle';
-                ctx.textAlign = 'center';
-                ctx.fillStyle = percentage >= 75 ? '#b91c1c' : percentage >= 50 ? '#c2410c' : '#15803d';
-                const text = percentage + '%';
-                ctx.fillText(text, width / 2, height / 2);
-
-                // Hiển thị nhãn “Nguy cơ”
-                const labelFontSize = (width / 16).toFixed(0);
-                ctx.font = `${labelFontSize}px sans-serif`;
-                ctx.fillStyle = '#6b7280';
-                ctx.fillText('Nguy cơ', width / 2, height / 2 + parseInt(fontSize) + 5);
-
-                ctx.save();
-            }
-        };
-
-        const riskColor = percentage >= 75 ? '#ef4444' : percentage >= 50 ? '#f97316' : '#22c55e';
-
-        // Tạo biểu đồ mới
-        diagnosisChartInstance = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Nguy cơ', 'An toàn'],
-                datasets: [{
-                    data: [percentage, 100 - percentage],
-                    backgroundColor: [
-                        riskColor,
-                        '#e5e7eb'
-                    ],
-                    borderWidth: 0,
-                    borderRadius: 5,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                cutout: '75%',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { enabled: false },
-                    centerText: true
-                },
-                animation: {
-                    animateRotate: true,
-                    animateScale: true,
-                    duration: 1000,
-                    easing: 'easeOutQuart'
-                }
-            },
-            plugins: [centerTextPlugin]
-        });
     }
 });
