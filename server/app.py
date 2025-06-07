@@ -8,7 +8,7 @@ import os
 import json
 import logging
 
-logging.basicConfig(level=logging.INFO, 
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -21,8 +21,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Tải mô hình
 try:
-    model = joblib.load("../server/models/modelV3.pkl")
-    logger.info("Mô hình đã được tải V3 thành công")
+    model = joblib.load("../server/models/modelV2.pth")
+    logger.info("Mô hình đã được tải V2 thành công")
 except Exception as e:
     logger.error(f"Lỗi khi tải mô hình: {str(e)}")
     model = None
