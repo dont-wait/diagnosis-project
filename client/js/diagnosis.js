@@ -4,7 +4,7 @@
  * Xử lý chức năng chẩn đoán tiểu đường và hiển thị kết quả.
  */
 
-const API_URL = 'https://diagnosis-project.onrender.com';
+const API_URL = 'http://localhost:5000';
 
 let currentRiskPercentage = null;
 let adviceAnimation = null;
